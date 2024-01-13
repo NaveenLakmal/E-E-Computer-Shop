@@ -10,4 +10,5 @@ public interface UserBo extends SuperBo {
 
 
     boolean saveUser(UserDto dto) throws SQLException, ClassNotFoundException;
+    String loginCheck(UserDto dto) throws SQLException, ClassNotFoundException;
 }

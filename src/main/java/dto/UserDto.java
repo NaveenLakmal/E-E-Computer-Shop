@@ -21,4 +21,9 @@ public class UserDto {
         this.password = password;
         this.userType = userType;
     }
+
+    public UserDto(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
 }

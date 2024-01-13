@@ -1,21 +1,28 @@
 package controller;
 
 
+import bo.BoFactory;
+import bo.custom.UserBo;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 
+import dao.util.BoType;
+import dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+import java.sql.SQLException;
 
 
 public class LoginFormController {
+
+    private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
     public JFXTextField txtUserName;
     public JFXTextField txtPassword;
     public JFXComboBox cmbBxSelectUser;
@@ -35,25 +42,6 @@ public class LoginFormController {
 
     }
 
-    /*public void signInButtonOnAction(ActionEvent actionEvent) {
-        UserDto dto = new UserDto(
-                txtUserName.getText(),
-                txtPassword.getText(),
-
-        );
-
-
-            boolean isSaved = userBo.loginCheck(dto);
-            if (isSaved){
-                new Alert(Alert.AlertType.INFORMATION,"Customer Saved!").show();
-                //loadCustomerTable();
-                //clearFields();
-            }
-
-
-
-
-    }*/
 
     public void forgetPasswordButtonOnAction(ActionEvent actionEvent) {
         Stage stage = (Stage) txtUserName.getScene().getWindow();
@@ -68,5 +56,30 @@ public class LoginFormController {
     }
 
     public void signInButtonOnAction(ActionEvent actionEvent) {
+
+        UserDto dto = new UserDto(txtUserName.getText(), txtPassword.getText());
+
+        try {
+            String userType = userBo.loginCheck(dto);
+
+            //System.out.println(userType);
+            if (userType == null) {
+                System.out.println("Null point");
+                // Handle the case where userType is null
+            } else if (userType.equalsIgnoreCase("Employee")) {
+                System.out.println("employee");
+                //new Alert(Alert.AlertType.INFORMATION,"vild User name or Password..!").show();
+            } else if (userType.equalsIgnoreCase("Admin")) {
+                System.out.println("admin");
+                //new Alert(Alert.AlertType.ERROR,"wrdvild User name or Password..!").show();
+            } else if (userType.equalsIgnoreCase("Main Admin")) {
+                System.out.println("Main admin");
+                //new Alert(Alert.AlertType.ERROR,"wrdvild User name or Password..!").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
