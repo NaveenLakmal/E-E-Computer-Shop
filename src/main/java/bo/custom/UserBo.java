@@ -1,7 +1,6 @@
 package bo.custom;
 
 import bo.SuperBo;
-import dao.util.CrudDao;
 import dto.UserDto;
 
 import java.sql.SQLException;

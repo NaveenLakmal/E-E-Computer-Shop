@@ -51,7 +51,7 @@ public class RegisterFormController {
             // Passwords match, create UserDto object
             String accountType = (String) cmdAccountType.getValue();
 
-            System.out.println(accountType);
+            //System.out.println(accountType);
 
             UserDto dto = new UserDto(email, password, accountType);
             // Perform further actions with the UserDto object if needed
