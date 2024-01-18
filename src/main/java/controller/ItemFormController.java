@@ -10,13 +10,11 @@ import dto.ItemDto;
 import dto.tm.ItemTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +24,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class ItemFormController {
 
@@ -36,11 +35,12 @@ public class ItemFormController {
     public TableColumn colSubCategory;
     public TableColumn colDescription;
     public TableColumn colOption;
-    public JFXTextField txtdescription;
+    //public JFXTextField txtdescription;
     public JFXTextField txtItemCode;
     public JFXTextField txtDescription;
     public JFXComboBox cmbCategory;
     public JFXTextField txtSubCategory;
+    public TextField txtSearch;
 
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
 
@@ -56,7 +56,55 @@ public class ItemFormController {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
         loadItemTable();
+
+        tblItem.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            setData((ItemTm) newValue);
+        });
+
+
+        // Create the FilteredList and set it as the items for the TableView
+        FilteredList<ItemTm> filteredList = new FilteredList<>(tblItem.getItems(), p -> true);
+
+// Add a listener to the text property of the search field
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Update the predicate based on the new text value
+            filteredList.setPredicate(item -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true; // Show all items when the search field is empty
+                }
+
+                // Check if the item's properties contain the search text
+                String lowerCaseFilter = newValue.toLowerCase();
+                return item.getICode().toLowerCase().contains(lowerCaseFilter) ||
+                        item.getSubCategory().toLowerCase().contains(lowerCaseFilter) ||
+                        item.getDescription().toLowerCase().contains(lowerCaseFilter);
+                // Add more fields as needed
+            });
+        });
+
+// Bind the FilteredList to the TableView
+        tblItem.setItems(filteredList);
+
+
         //
+    }
+    private void clearFields() {
+        tblItem.refresh();
+        txtItemCode.clear();
+        cmbCategory.setValue(null);
+        txtSubCategory.clear();
+        txtDescription.clear();
+        txtItemCode.setEditable(true);
+    }
+
+    private void setData(ItemTm newValue) {
+        if (newValue != null) {
+            txtItemCode.setEditable(false);
+            txtItemCode.setText(newValue.getICode());
+            cmbCategory.setValue(newValue.getCategory().toString());
+            txtSubCategory.setText(newValue.getSubCategory());
+            txtDescription.setText(newValue.getDescription());
+        }
     }
 
     private void deleteItem(String iCode) {
@@ -121,6 +169,9 @@ public class ItemFormController {
 
 
     public void reloadButtonOnAction(ActionEvent actionEvent) {
+        loadItemTable();
+        tblItem.refresh();
+        clearFields();
     }
 
     public void searchButtonOnAction(ActionEvent actionEvent) {
@@ -162,7 +213,7 @@ public class ItemFormController {
             if (isSaved){
                 new Alert(Alert.AlertType.INFORMATION,"Customer Saved!").show();
                 //loadCustomerTable();
-                //clearFields();
+                clearFields();
             }
 
         } catch (SQLIntegrityConstraintViolationException ex){

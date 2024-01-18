@@ -100,6 +100,6 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </JFXButton>
-      <TextField layoutX="315.0" layoutY="104.0" prefHeight="39.0" prefWidth="316.0" promptText="Search Here" />
+      <TextField fx:id="txtSearch" layoutX="315.0" layoutY="104.0" prefHeight="39.0" prefWidth="316.0" promptText="Search Here" />
    </children>
 </AnchorPane>
