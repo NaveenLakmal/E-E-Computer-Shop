@@ -71,7 +71,7 @@ public class LoginFormController {
             Stage stage = (Stage) txtUserName.getScene().getWindow();
             stage.setTitle("Register Form");
             try {
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerForm.fxml"))));
+                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBordForm.fxml"))));
                 stage.centerOnScreen();
                 stage.show();
             } catch (IOException e) {

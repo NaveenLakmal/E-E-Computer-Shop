@@ -130,7 +130,7 @@ public class ItemFormController {
     public void goBack(MouseEvent mouseEvent) {
         Stage stage = (Stage)imgBack.getScene().getWindow();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBordForm.fxml"))));
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
