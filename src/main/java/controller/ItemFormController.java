@@ -54,7 +54,7 @@ public class ItemFormController {
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colSubCategory.setCellValueFactory(new PropertyValueFactory<>("subCategory"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("description"));
         loadItemTable();
 
         tblItem.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
