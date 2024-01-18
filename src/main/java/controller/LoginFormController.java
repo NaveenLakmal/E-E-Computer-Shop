@@ -80,7 +80,7 @@ public class LoginFormController {
 
             //System.out.println(userType);
             if (userType == null) {
-                System.out.println("Null point");
+                System.out.println("check point");
                 // Handle the case where userType is null
             } else if (userType.equalsIgnoreCase("Employee")) {
 

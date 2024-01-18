@@ -60,7 +60,7 @@ public class RegisterFormController {
                 boolean isSaved = userBo.saveUser(dto);
 
                 if (isSaved){
-                    new Alert(Alert.AlertType.INFORMATION,"Customer Saved!").show();
+                    new Alert(Alert.AlertType.INFORMATION,"Item Saved!").show();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);

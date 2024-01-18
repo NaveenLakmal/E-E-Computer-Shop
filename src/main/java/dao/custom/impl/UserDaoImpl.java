@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
@@ -23,6 +24,16 @@ public class UserDaoImpl implements UserDao {
         transaction.commit();
         session.close();
         return true;
+    }
+
+    @Override
+    public boolean delete(String value) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public List<User> getAll() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     @Override
