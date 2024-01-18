@@ -127,6 +127,24 @@ public class ItemFormController {
     }
 
     public void updateButtonOnAction(ActionEvent actionEvent) {
+
+        ItemDto dto = new ItemDto(txtItemCode.getText(),
+                (String) cmbCategory.getValue(),
+                txtSubCategory.getText(),
+                txtDescription.getText()
+        );
+
+        try {
+            boolean isUpdated = itemBo.updateItems(dto);
+            if (isUpdated){
+                new Alert(Alert.AlertType.INFORMATION,"Items "+dto.getItemCode()+" Updated!").show();
+                loadItemTable();
+                //clearFields();
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveButtonOnAction(ActionEvent actionEvent) {

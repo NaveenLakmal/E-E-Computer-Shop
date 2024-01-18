@@ -27,6 +27,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public boolean update(User entity) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
     public boolean delete(String value) throws SQLException, ClassNotFoundException {
         return false;
     }
