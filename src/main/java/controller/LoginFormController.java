@@ -68,22 +68,27 @@ public class LoginFormController {
         try {
             String userType = userBo.loginCheck(dto);
 
-            Stage stage = (Stage) txtUserName.getScene().getWindow();
-            stage.setTitle("Register Form");
-            try {
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBordForm.fxml"))));
-                stage.centerOnScreen();
-                stage.show();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+
 
             //System.out.println(userType);
-            if (userType == null) {
+            if(txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty()){
+                new Alert(Alert.AlertType.ERROR,"user Name Input bar or Password Input Bar is Emty").show();
+            }
+            else if (userType == null ) {
                 System.out.println("check point");
+                new Alert(Alert.AlertType.ERROR,"Invalid User Name Or Password...!!").show();
                 // Handle the case where userType is null
             } else if (userType.equalsIgnoreCase("Employee")) {
 
+                Stage stage = (Stage) txtUserName.getScene().getWindow();
+                stage.setTitle("Register Form");
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBordForm.fxml"))));
+                    stage.centerOnScreen();
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 System.out.println("employee");
                 //new Alert(Alert.AlertType.INFORMATION,"vild User name or Password..!").show();
             } else if (userType.equalsIgnoreCase("Admin")) {

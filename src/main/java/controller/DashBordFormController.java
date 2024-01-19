@@ -18,6 +18,10 @@ public class DashBordFormController {
     public Label lblDate;
     public Label lblTime;
 
+    public void initialize() {
+        dateAndTime();
+    }
+
     private void dateAndTime() {
         Timeline date = new Timeline((new KeyFrame(
                 Duration.ZERO,
@@ -63,5 +67,17 @@ public class DashBordFormController {
     }
 
     public void placeBtnOnAction(ActionEvent actionEvent) {
+    }
+
+    public void logOutButtonOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) lblDate.getScene().getWindow();
+        stage.setTitle("Register Form");
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"))));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
