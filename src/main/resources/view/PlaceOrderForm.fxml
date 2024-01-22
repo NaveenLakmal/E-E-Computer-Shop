@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="806.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlaceOrderFormController">
    <children>
       <GridPane layoutX="-5.0" layoutY="-3.0" prefHeight="93.0" prefWidth="1192.0" style="-fx-background-color: #40a4c2;">
@@ -100,5 +99,6 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtDescription" layoutX="586.0" layoutY="263.0" prefHeight="31.0" prefWidth="245.0" />
+      <Label fx:id="lblOrderId" layoutX="1013.0" layoutY="112.0" prefHeight="31.0" prefWidth="85.0" text="Order ID" />
    </children>
 </AnchorPane>

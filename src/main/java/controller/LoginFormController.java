@@ -34,6 +34,7 @@ public class LoginFormController {
     public JFXComboBox cmbBxSelectUser;
 
     //private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
+    private DashBordFormController dashBordFormController;
 
     public void registerButtonOnAction(ActionEvent actionEvent) {
         Stage stage = (Stage) txtUserName.getScene().getWindow();
@@ -68,17 +69,44 @@ public class LoginFormController {
         try {
             String userType = userBo.loginCheck(dto);
 
+            //
+
+            //
 
 
             //System.out.println(userType);
-            if(txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty()){
-                new Alert(Alert.AlertType.ERROR,"user Name Input bar or Password Input Bar is Emty").show();
-            }
-            else if (userType == null ) {
+            if (txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+                //new Alert(Alert.AlertType.ERROR, "user Name Input bar or Password Input Bar is Emty").show();
+                Stage stage = (Stage) txtUserName.getScene().getWindow();
+                stage.setTitle("Register Form");
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBordForm.fxml"))));
+                    stage.centerOnScreen();
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (userType == null) {
                 System.out.println("check point");
-                new Alert(Alert.AlertType.ERROR,"Invalid User Name Or Password...!!").show();
+                new Alert(Alert.AlertType.ERROR, "Invalid User Name Or Password...!!").show();
                 // Handle the case where userType is null
-            } else if (userType.equalsIgnoreCase("Employee")) {
+
+//            } else if (!(userType == null)) {
+//
+//                Stage stage = (Stage) txtUserName.getScene().getWindow();
+//                stage.setTitle("Register Form");
+//                try {
+//
+//                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBordForm.fxml"))));
+//                    stage.centerOnScreen();
+//                    stage.show();
+//
+//                    //dashBordFormController.setUserType(userType);
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+                } else if (userType.equalsIgnoreCase("Employee")) {
 
                 Stage stage = (Stage) txtUserName.getScene().getWindow();
                 stage.setTitle("Register Form");
