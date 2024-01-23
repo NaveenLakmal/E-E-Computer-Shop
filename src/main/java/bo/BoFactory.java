@@ -1,8 +1,6 @@
 package bo;
 
-import bo.custom.impl.CustomerBoImpl;
-import bo.custom.impl.ItemBoImpl;
-import bo.custom.impl.UserBoImpl;
+import bo.custom.impl.*;
 import dao.util.BoType;
 import entity.Item;
 
@@ -20,6 +18,8 @@ public class BoFactory {
             case USER: return (T) new UserBoImpl();
             case ITEM: return (T) new ItemBoImpl();
             case CUSTOMER: return (T) new CustomerBoImpl();
+            case ORDER_DETAIL: return (T) new OrderDetailBoImpl();
+            case ORDER: return (T) new OrderBoImpl();
 
         }
         return null;

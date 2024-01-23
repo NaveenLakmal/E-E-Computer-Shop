@@ -1,6 +1,14 @@
 package dto;
 
+import lombok.*;
+
 import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 
 public class OrderDto {
     private String orderId;
@@ -13,5 +21,5 @@ public class OrderDto {
         this.custId = custId;
     }
 
-    //private List<OrderDetailDto> list;
+    private List<OrderDetailDto> list;
 }
