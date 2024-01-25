@@ -53,7 +53,7 @@ public class CustomerFormController {
             colNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
             colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
             colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
-            loadItemTable();
+            loadCustomerTable();
 
             tblCustomer.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
                 setData((CustomerTm) newValue);
@@ -99,13 +99,16 @@ public class CustomerFormController {
 
 
 
-    private void loadItemTable() {
+    private void loadCustomerTable() {
         ObservableList<CustomerTm> tmList = FXCollections.observableArrayList();
 
         try {
             List<CustomerDto> dtoList  = customerBo.allCustomer();
             for (CustomerDto dto:dtoList) {
                 JFXButton btn = new JFXButton("Delete");
+                    btn.setStyle("-fx-background-color: #ff4d79;"); // Set the background color to red
+                    btn.setPrefWidth(90); // Set preferred width
+                    btn.setPrefHeight(32); // Set preferred height
                 CustomerTm c = new CustomerTm(
                         dto.getCustId(),
                         dto.getCustName(),
@@ -131,6 +134,7 @@ public class CustomerFormController {
         txtCustId.clear();
         txtCustName.clear();
         txtNumber.clear();
+        txtEmail.clear();
 
         txtCustId.setEditable(true);
     }
@@ -138,8 +142,8 @@ public class CustomerFormController {
     private void setData(CustomerTm newValue) {
         if (newValue != null) {
             txtCustId.setEditable(false);
-            txtCustId.setText(newValue.getCustName());
-            txtCustName.setText(newValue.getNumber());
+            txtCustId.setText(newValue.getCustId());
+            txtCustName.setText(newValue.getCustName());
             txtNumber.setText(newValue.getNumber());
             txtEmail.setText(newValue.getEmail());
 
@@ -151,7 +155,7 @@ public class CustomerFormController {
             boolean isDeleted = customerBo.deleteCustomer(custId);
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION, "Item Deleted!").show();
-                loadItemTable();
+                loadCustomerTable();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
             }
@@ -179,8 +183,8 @@ public class CustomerFormController {
             boolean isUpdated = customerBo.updateCustomer(dto);
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Items "+dto.getCustId()+" Updated!").show();
-                //loadItemTable();
-                //clearFields();
+                loadCustomerTable();
+                clearFields();
             }
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -200,8 +204,8 @@ public class CustomerFormController {
             boolean isSaved = customerBo.saveCustomer(dto);
             if (isSaved){
                 new Alert(Alert.AlertType.INFORMATION,"Customer Saved!").show();
-                //loadCustomerTable();
-                //clearFields();
+                loadCustomerTable();
+                clearFields();
             }
 
         } catch (SQLIntegrityConstraintViolationException ex){
@@ -212,7 +216,7 @@ public class CustomerFormController {
     }
 
     public void reloadButtonOnAction(ActionEvent actionEvent) {
-        loadItemTable();
+        loadCustomerTable();
         tblCustomer.refresh();
         clearFields();
     }

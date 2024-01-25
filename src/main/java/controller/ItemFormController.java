@@ -54,7 +54,7 @@ public class ItemFormController {
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colSubCategory.setCellValueFactory(new PropertyValueFactory<>("subCategory"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        colOption.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
         loadItemTable();
 
         tblItem.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -146,6 +146,10 @@ public class ItemFormController {
             List<ItemDto> dtoList  = itemBo.allItems();
             for (ItemDto dto:dtoList) {
                 JFXButton btn = new JFXButton("Delete");
+                btn.setStyle("-fx-background-color: #ff4d79;"); // Set the background color to red
+                btn.setPrefWidth(90); // Set preferred width
+                btn.setPrefHeight(32); // Set preferred height
+
                 ItemTm c = new ItemTm(
                         dto.getItemCode(),
                         dto.getCategory(),

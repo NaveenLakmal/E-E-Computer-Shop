@@ -98,6 +98,9 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtDescription" layoutX="586.0" layoutY="263.0" prefHeight="31.0" prefWidth="245.0" />
-      <Label fx:id="lblOrderId" layoutX="1013.0" layoutY="112.0" prefHeight="31.0" prefWidth="85.0" />
+      <Label fx:id="lblOrderId" layoutX="991.0" layoutY="112.0" prefHeight="34.0" prefWidth="107.0">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font></Label>
    </children>
 </AnchorPane>
