@@ -44,7 +44,7 @@ public class AdditionalItemFormController {
     public TableColumn colName;
     public TableColumn colPrice;
 
-    private AdditionalItemBo additionalItemBo = BoFactory.getInstance().getBo(BoType.ITEM);
+    private AdditionalItemBo additionalItemBo = BoFactory.getInstance().getBo(BoType.ADDITIONALITEM);
 
     public void initialize(){
         ObservableList list = FXCollections.observableArrayList("Electronic", "Electrical");

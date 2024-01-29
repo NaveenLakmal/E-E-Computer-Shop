@@ -23,6 +23,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(Customer.class)
                 .addAnnotatedClass(Orders.class)
                 .addAnnotatedClass(OrderDetail.class)
+                .addAnnotatedClass(Item.class)
                 //PLEASE ADD NEW ENTITY CLASS
 
                 .getMetadataBuilder()

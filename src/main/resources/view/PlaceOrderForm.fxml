@@ -86,7 +86,7 @@
       </JFXButton>
       <JFXComboBox fx:id="cmbCustId" layoutX="60.0" layoutY="163.0" prefHeight="31.0" prefWidth="116.0" />
       <JFXComboBox fx:id="cmbItemCode" layoutX="60.0" layoutY="263.0" prefHeight="31.0" prefWidth="116.0" />
-      <Label layoutX="60.0" layoutY="221.0" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="  Item Code" textAlignment="RIGHT">
+      <Label layoutX="60.0" layoutY="221.0" prefHeight="31.0" prefWidth="142.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Additional Item" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

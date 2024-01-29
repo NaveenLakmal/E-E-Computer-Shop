@@ -15,10 +15,11 @@ public class BoFactory {
     public <T extends SuperBo>T getBo(BoType type){
         switch (type){
             case USER: return (T) new UserBoImpl();
-            case ITEM: return (T) new AdditionalItemBoImpl();
+            case ADDITIONALITEM: return (T) new AdditionalItemBoImpl();
             case CUSTOMER: return (T) new CustomerBoImpl();
             case ORDER_DETAIL: return (T) new OrderDetailBoImpl();
             case ORDER: return (T) new OrderBoImpl();
+            case ITEM: return (T) new ItemBoImpl();
 
         }
         return null;

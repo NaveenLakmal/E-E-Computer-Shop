@@ -1,13 +1,13 @@
 package controller;
 
 import bo.BoFactory;
-import bo.custom.AdditionalItemBo;
+import bo.custom.ItemBo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.util.BoType;
-import dto.AdditionalItemDto;
-import dto.tm.AdditionalItemTm;
+import dto.ItemDto;
+import dto.tm.ItemTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class ItemFormController {
 
@@ -41,9 +42,9 @@ public class ItemFormController {
     public JFXTextField txtSubCategory;
     public TextField txtSearch;
 
-    private AdditionalItemBo additionalItemBo = BoFactory.getInstance().getBo(BoType.ITEM);
+    private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
 
-    /*public void initialize(){
+    public void initialize(){
         ObservableList list = FXCollections.observableArrayList("Electronic", "Electrical");
 
         cmbCategory.setItems(list);
@@ -57,12 +58,12 @@ public class ItemFormController {
         loadItemTable();
 
         tblItem.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            setData((AdditionalItemTm) newValue);
+            setData((ItemTm) newValue);
         });
 
 
         // Create the FilteredList and set it as the items for the TableView
-        FilteredList<AdditionalItemTm> filteredList = new FilteredList<>(tblItem.getItems(), p -> true);
+        FilteredList<ItemTm> filteredList = new FilteredList<>(tblItem.getItems(), p -> true);
 
 // Add a listener to the text property of the search field
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -86,7 +87,7 @@ public class ItemFormController {
 
 
         //
-    }*/
+    }
     private void clearFields() {
         tblItem.refresh();
         txtItemCode.clear();
@@ -96,20 +97,20 @@ public class ItemFormController {
         txtItemCode.setEditable(true);
     }
 
-    private void setData(AdditionalItemTm newValue) {
-//        if (newValue != null) {
-//            txtItemCode.setEditable(false);
-//            txtItemCode.setText(newValue.getICode());
-//            cmbCategory.setValue(newValue.getCategory().toString());
-//            txtSubCategory.setText(newValue.getSubCategory());
-//            txtDescription.setText(newValue.getDescription());
-//        }
+    private void setData(ItemTm newValue) {
+        if (newValue != null) {
+            txtItemCode.setEditable(false);
+            txtItemCode.setText(newValue.getICode());
+            cmbCategory.setValue(newValue.getCategory().toString());
+            txtSubCategory.setText(newValue.getSubCategory());
+            txtDescription.setText(newValue.getDescription());
+        }
     }
 
     private void deleteItem(String iCode) {
 
         try {
-            boolean isDeleted = additionalItemBo.deleteItem(iCode);
+            boolean isDeleted = itemBo.deleteItem(iCode);
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION, "Item Deleted!").show();
                 loadItemTable();
@@ -139,34 +140,34 @@ public class ItemFormController {
 
     //
     private void loadItemTable() {
-//        ObservableList<AdditionalItemTm> tmList = FXCollections.observableArrayList();
-//
-//        try {
-//            List<AdditionalItemDto> dtoList  = additionalItemBo.allItems();
-//            for (AdditionalItemDto dto:dtoList) {
-//                JFXButton btn = new JFXButton("Delete");
-//                btn.setStyle("-fx-background-color: #ff4d79;"); // Set the background color to red
-//                btn.setPrefWidth(90); // Set preferred width
-//                btn.setPrefHeight(32); // Set preferred height
-//
-//                AdditionalItemTm c = new AdditionalItemTm(
-//                        dto.getItemCode(),
-//                        dto.getCategory(),
-//                        dto.getSubCategory(),
-//                        dto.getDescription(),
-//                        btn
-//                );
-//
-//                btn.setOnAction(actionEvent -> {
-//                    deleteItem(c.getICode());
-//                });
-//
-//                tmList.add(c);
-//            }
-//            tblItem.setItems(tmList);
-//        } catch (SQLException | ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
+        ObservableList<ItemTm> tmList = FXCollections.observableArrayList();
+
+        try {
+            List<ItemDto> dtoList  = itemBo.allItems();
+            for (ItemDto dto:dtoList) {
+                JFXButton btn = new JFXButton("Delete");
+                btn.setStyle("-fx-background-color: #ff4d79;"); // Set the background color to red
+                btn.setPrefWidth(90); // Set preferred width
+                btn.setPrefHeight(32); // Set preferred height
+
+                ItemTm c = new ItemTm(
+                        dto.getItemCode(),
+                        dto.getCategory(),
+                        dto.getSubCategory(),
+                        dto.getDescription(),
+                        btn
+                );
+
+                btn.setOnAction(actionEvent -> {
+                    deleteItem(c.getICode());
+                });
+
+                tmList.add(c);
+            }
+            tblItem.setItems(tmList);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
     //
 
@@ -182,37 +183,37 @@ public class ItemFormController {
 
     public void updateButtonOnAction(ActionEvent actionEvent) {
 
-//        AdditionalItemDto dto = new AdditionalItemDto(txtItemCode.getText(),
-//                (String) cmbCategory.getValue(),
-//                txtSubCategory.getText(),
-//                txtDescription.getText()
-//        );
-//
-//        try {
-//            boolean isUpdated = additionalItemBo.updateItems(dto);
-//            if (isUpdated){
-//                new Alert(Alert.AlertType.INFORMATION,"Items "+dto.getItemCode()+" Updated!").show();
-//                loadItemTable();
-//                //clearFields();
-//            }
-//
-//        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-//        }
+        ItemDto dto = new ItemDto(txtItemCode.getText(),
+                (String) cmbCategory.getValue(),
+                txtSubCategory.getText(),
+                txtDescription.getText()
+        );
+
+        try {
+            boolean isUpdated = itemBo.updateItems(dto);
+            if (isUpdated){
+                new Alert(Alert.AlertType.INFORMATION,"Items "+dto.getItemCode()+" Updated!").show();
+                loadItemTable();
+                //clearFields();
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    /*public void saveButtonOnAction(ActionEvent actionEvent) {
+    public void saveButtonOnAction(ActionEvent actionEvent) {
 
         String categoryType = (String) cmbCategory.getValue();
 
-        AdditionalItemDto dto = new AdditionalItemDto(txtItemCode.getText(),
+        ItemDto dto = new ItemDto(txtItemCode.getText(),
                 categoryType,
                 txtSubCategory.getText(),
                 txtDescription.getText()
         );
 
         try {
-            boolean isSaved = additionalItemBo.saveItem(dto);
+            boolean isSaved = itemBo.saveItem(dto);
             if (isSaved){
                 new Alert(Alert.AlertType.INFORMATION,"Customer Saved!").show();
                 //loadCustomerTable();
@@ -224,5 +225,5 @@ public class ItemFormController {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

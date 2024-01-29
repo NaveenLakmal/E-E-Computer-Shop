@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AdditionalItemBoImpl implements AdditionalItemBo {
 
-    private AdditionalItemDao additionalItemDao = DaoFactory.getInstance().getDao(DaoType.ITEM);
+    private AdditionalItemDao additionalItemDao = DaoFactory.getInstance().getDao(DaoType.ADDITIONALITEM);
 
     @Override
     public boolean saveItem(AdditionalItemDto dto) throws SQLException, ClassNotFoundException {

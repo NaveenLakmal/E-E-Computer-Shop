@@ -54,17 +54,17 @@ public class DashBordFormController {
     }
 
     public void itemsBtnOnAction(ActionEvent actionEvent) {
-
-
         Stage stage = (Stage) lblDate.getScene().getWindow();
         stage.setTitle("Register Form");
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdditionalItemForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ItemForm.fxml"))));
             stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
     }
 
     public void ordersBtnOnAction(ActionEvent actionEvent) {
@@ -87,6 +87,18 @@ public class DashBordFormController {
         stage.setTitle("Register Form");
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"))));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void additionalButtonOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) lblDate.getScene().getWindow();
+        stage.setTitle("Register Form");
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdditionalItemForm.fxml"))));
             stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
