@@ -2,14 +2,11 @@ package controller;
 
 import bo.BoFactory;
 import bo.custom.CustomerBo;
-import bo.custom.ItemBo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import dao.util.BoType;
 import dto.CustomerDto;
-import dto.ItemDto;
 import dto.tm.CustomerTm;
-import dto.tm.ItemTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;

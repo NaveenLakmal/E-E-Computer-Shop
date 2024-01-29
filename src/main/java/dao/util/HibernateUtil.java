@@ -19,7 +19,7 @@ public class HibernateUtil {
 
         Metadata metadata = new MetadataSources(standardRegistry)
                 .addAnnotatedClass(User.class)
-                .addAnnotatedClass(Item.class)
+                .addAnnotatedClass(AdditionalItem.class)
                 .addAnnotatedClass(Customer.class)
                 .addAnnotatedClass(Orders.class)
                 .addAnnotatedClass(OrderDetail.class)

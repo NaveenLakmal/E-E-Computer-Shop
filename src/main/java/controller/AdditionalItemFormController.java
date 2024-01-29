@@ -3,7 +3,6 @@ package controller;
 import bo.BoFactory;
 import bo.custom.AdditionalItemBo;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.util.BoType;
 import dto.AdditionalItemDto;
@@ -25,7 +24,7 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
-public class ItemFormController {
+public class AdditionalItemFormController {
 
     public ImageView imgBack;
     public TableView tblItem;
@@ -36,23 +35,26 @@ public class ItemFormController {
     public TableColumn colOption;
     //public JFXTextField txtdescription;
     public JFXTextField txtItemCode;
-    public JFXTextField txtDescription;
-    public JFXComboBox cmbCategory;
-    public JFXTextField txtSubCategory;
+    //public JFXTextField txtDescription;
+    //public JFXComboBox cmbCategory;
+    //public JFXTextField txtSubCategory;
     public TextField txtSearch;
+    public JFXTextField txtItemPrice;
+    public JFXTextField txtItemName;
+    public TableColumn colName;
+    public TableColumn colPrice;
 
     private AdditionalItemBo additionalItemBo = BoFactory.getInstance().getBo(BoType.ITEM);
 
-    /*public void initialize(){
+    public void initialize(){
         ObservableList list = FXCollections.observableArrayList("Electronic", "Electrical");
 
-        cmbCategory.setItems(list);
+        //!cmbCategory.setItems(list);
 
         //
-        colItemCode.setCellValueFactory(new PropertyValueFactory<>("iCode"));
-        colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        colSubCategory.setCellValueFactory(new PropertyValueFactory<>("subCategory"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
         loadItemTable();
 
@@ -74,9 +76,8 @@ public class ItemFormController {
 
                 // Check if the item's properties contain the search text
                 String lowerCaseFilter = newValue.toLowerCase();
-                return item.getICode().toLowerCase().contains(lowerCaseFilter) ||
-                        item.getSubCategory().toLowerCase().contains(lowerCaseFilter) ||
-                        item.getDescription().toLowerCase().contains(lowerCaseFilter);
+                return item.getItemCode().toLowerCase().contains(lowerCaseFilter) ||
+                        item.getName().toLowerCase().contains(lowerCaseFilter);
                 // Add more fields as needed
             });
         });
@@ -86,24 +87,22 @@ public class ItemFormController {
 
 
         //
-    }*/
+    }
     private void clearFields() {
         tblItem.refresh();
         txtItemCode.clear();
-        cmbCategory.setValue(null);
-        txtSubCategory.clear();
-        txtDescription.clear();
+        txtItemName.clear();
+        txtItemPrice.clear();
         txtItemCode.setEditable(true);
     }
 
     private void setData(AdditionalItemTm newValue) {
-//        if (newValue != null) {
-//            txtItemCode.setEditable(false);
-//            txtItemCode.setText(newValue.getICode());
-//            cmbCategory.setValue(newValue.getCategory().toString());
-//            txtSubCategory.setText(newValue.getSubCategory());
-//            txtDescription.setText(newValue.getDescription());
-//        }
+        if (newValue != null) {
+            txtItemCode.setEditable(false);
+            txtItemCode.setText(newValue.getItemCode());
+            txtItemName.setText(newValue.getName());
+            txtItemPrice.setText(newValue.getPrice()+"");
+        }
     }
 
     private void deleteItem(String iCode) {
@@ -139,34 +138,33 @@ public class ItemFormController {
 
     //
     private void loadItemTable() {
-//        ObservableList<AdditionalItemTm> tmList = FXCollections.observableArrayList();
-//
-//        try {
-//            List<AdditionalItemDto> dtoList  = additionalItemBo.allItems();
-//            for (AdditionalItemDto dto:dtoList) {
-//                JFXButton btn = new JFXButton("Delete");
-//                btn.setStyle("-fx-background-color: #ff4d79;"); // Set the background color to red
-//                btn.setPrefWidth(90); // Set preferred width
-//                btn.setPrefHeight(32); // Set preferred height
-//
-//                AdditionalItemTm c = new AdditionalItemTm(
-//                        dto.getItemCode(),
-//                        dto.getCategory(),
-//                        dto.getSubCategory(),
-//                        dto.getDescription(),
-//                        btn
-//                );
-//
-//                btn.setOnAction(actionEvent -> {
-//                    deleteItem(c.getICode());
-//                });
-//
-//                tmList.add(c);
-//            }
-//            tblItem.setItems(tmList);
-//        } catch (SQLException | ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
+        ObservableList<AdditionalItemTm> tmList = FXCollections.observableArrayList();
+
+        try {
+            List<AdditionalItemDto> dtoList  = additionalItemBo.allItems();
+            for (AdditionalItemDto dto:dtoList) {
+                JFXButton btn = new JFXButton("Delete");
+                btn.setStyle("-fx-background-color: #ff4d79;"); // Set the background color to red
+                btn.setPrefWidth(90); // Set preferred width
+                btn.setPrefHeight(32); // Set preferred height
+
+                AdditionalItemTm c = new AdditionalItemTm(
+                        dto.getItemCode(),
+                        dto.getName(),
+                        dto.getPrice(),
+                        btn
+                );
+
+                btn.setOnAction(actionEvent -> {
+                    deleteItem(c.getItemCode());
+                });
+
+                tmList.add(c);
+            }
+            tblItem.setItems(tmList);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
     //
 
@@ -182,40 +180,38 @@ public class ItemFormController {
 
     public void updateButtonOnAction(ActionEvent actionEvent) {
 
-//        AdditionalItemDto dto = new AdditionalItemDto(txtItemCode.getText(),
-//                (String) cmbCategory.getValue(),
-//                txtSubCategory.getText(),
-//                txtDescription.getText()
-//        );
-//
-//        try {
-//            boolean isUpdated = additionalItemBo.updateItems(dto);
-//            if (isUpdated){
-//                new Alert(Alert.AlertType.INFORMATION,"Items "+dto.getItemCode()+" Updated!").show();
-//                loadItemTable();
-//                //clearFields();
-//            }
-//
-//        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-//        }
+        AdditionalItemDto dto = new AdditionalItemDto(txtItemCode.getText(),
+                txtItemName.getText(),
+                Double.parseDouble(txtItemPrice.getText())
+        );
+
+        try {
+            boolean isUpdated = additionalItemBo.updateItems(dto);
+            if (isUpdated){
+                new Alert(Alert.AlertType.INFORMATION,"Items "+dto.getItemCode()+" Updated!").show();
+                loadItemTable();
+                //clearFields();
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    /*public void saveButtonOnAction(ActionEvent actionEvent) {
+    public void saveButtonOnAction(ActionEvent actionEvent) {
 
-        String categoryType = (String) cmbCategory.getValue();
+       // String categoryType = (String) cmbCategory.getValue();
 
         AdditionalItemDto dto = new AdditionalItemDto(txtItemCode.getText(),
-                categoryType,
-                txtSubCategory.getText(),
-                txtDescription.getText()
+                txtItemName.getText(),
+                Double.parseDouble(txtItemPrice.getText())
         );
 
         try {
             boolean isSaved = additionalItemBo.saveItem(dto);
             if (isSaved){
                 new Alert(Alert.AlertType.INFORMATION,"Customer Saved!").show();
-                //loadCustomerTable();
+                loadItemTable();
                 clearFields();
             }
 
@@ -224,5 +220,5 @@ public class ItemFormController {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

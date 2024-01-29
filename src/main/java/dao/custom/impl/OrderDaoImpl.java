@@ -31,7 +31,7 @@ public class OrderDaoImpl implements OrderDao {
         for (OrderDetailDto detailDto:list) {
             OrderDetail orderDetail = new OrderDetail(
                     new OrderDetailsKey(detailDto.getOrderId(), detailDto.getItemCode()),
-                    session.find(Item.class, detailDto.getItemCode()),
+                    session.find(AdditionalItem.class, detailDto.getItemCode()),
                     order
 
 

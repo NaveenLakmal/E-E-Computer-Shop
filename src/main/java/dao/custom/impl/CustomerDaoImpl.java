@@ -3,7 +3,6 @@ package dao.custom.impl;
 import dao.custom.CustomerDao;
 import dao.util.HibernateUtil;
 import entity.Customer;
-import entity.Item;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

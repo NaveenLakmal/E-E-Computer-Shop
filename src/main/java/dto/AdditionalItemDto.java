@@ -7,11 +7,10 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class ItemDto {
+public class AdditionalItemDto {
 
     private String itemCode;
-    private String category;
-    private String subCategory;
-    private String description;
+    private String name;
+    private double price;
 
 }

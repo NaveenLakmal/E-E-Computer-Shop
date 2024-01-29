@@ -1,20 +1,18 @@
 package controller;
 
 import bo.custom.CustomerBo;
-import bo.custom.ItemBo;
+import bo.custom.AdditionalItemBo;
 import bo.custom.OrderBo;
 import bo.custom.impl.CustomerBoImpl;
-import bo.custom.impl.ItemBoImpl;
+import bo.custom.impl.AdditionalItemBoImpl;
 import bo.custom.impl.OrderBoImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import dao.custom.ItemDao;
-import dao.custom.impl.ItemDaoImpl;
+import dao.custom.AdditionalItemDao;
+import dao.custom.impl.AdditionalItemDaoImpl;
 import dto.CustomerDto;
-import dto.ItemDto;
+import dto.AdditionalItemDto;
 import dto.OrderDetailDto;
 import dto.OrderDto;
 import dto.tm.OrderTm;
@@ -25,7 +23,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -57,11 +54,11 @@ public class PlaceOrderFormController {
     public TableColumn colSubCategory;
 
     private CustomerBo customerBo = new CustomerBoImpl();
-    private ItemBo itemsBo = new ItemBoImpl();
+    private AdditionalItemBo itemsBo = new AdditionalItemBoImpl();
     private OrderBo orderBo= new OrderBoImpl();
-    private ItemDao itemDao = new ItemDaoImpl();
+    private AdditionalItemDao additionalItemDao = new AdditionalItemDaoImpl();
     private List<CustomerDto> customers;
-    private List<ItemDto> items;
+    private List<AdditionalItemDto> items;
 
     private ObservableList<OrderTm> tmList = FXCollections.observableArrayList();
     public void initialize(){
@@ -90,10 +87,10 @@ public class PlaceOrderFormController {
         });
 
         cmbItemCode.getSelectionModel().selectedItemProperty().addListener((observableValue, o, newValue) -> {
-            for (ItemDto dto:items) {
+            for (AdditionalItemDto dto:items) {
                 if (dto.getItemCode().equals(newValue.toString())){
-                    txtDescription.setText(dto.getDescription());
-                    txtSubCategory.setText(dto.getSubCategory());
+                    txtDescription.setText(dto.getName());
+                    txtSubCategory.setText(dto.getPrice()+"");
                 }
             }
         });
@@ -104,7 +101,7 @@ public class PlaceOrderFormController {
     private void loadItemCodes() {
         ObservableList list = FXCollections.observableArrayList();
 
-        for (ItemDto dto:items) {
+        for (AdditionalItemDto dto:items) {
             list.add(dto.getItemCode());
         }
 

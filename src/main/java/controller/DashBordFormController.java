@@ -1,13 +1,11 @@
 package controller;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -61,7 +59,7 @@ public class DashBordFormController {
         Stage stage = (Stage) lblDate.getScene().getWindow();
         stage.setTitle("Register Form");
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ItemForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdditionalItemForm.fxml"))));
             stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
