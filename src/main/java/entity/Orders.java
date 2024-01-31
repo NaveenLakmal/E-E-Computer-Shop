@@ -25,11 +25,20 @@ public class Orders {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    private String category;
+    private String subCategory;
+    private String description;
+
+
+
     @OneToMany(mappedBy = "orders")
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
-    public Orders(String orderId, String date) {
+    public Orders(String orderId, String date,String category,String description,String subCategory) {
         this.orderId = orderId;
         this.date = date;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.description = description;
     }
 }

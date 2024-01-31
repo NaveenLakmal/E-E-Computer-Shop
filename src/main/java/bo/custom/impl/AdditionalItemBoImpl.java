@@ -20,6 +20,7 @@ public class AdditionalItemBoImpl implements AdditionalItemBo {
         return additionalItemDao.save(new AdditionalItem(
                 dto.getItemCode(),
                 dto.getName(),
+                dto.getQty(),
                 dto.getPrice()
         ));
     }
@@ -29,6 +30,7 @@ public class AdditionalItemBoImpl implements AdditionalItemBo {
         return additionalItemDao.update(new AdditionalItem(
                 dto.getItemCode(),
                 dto.getName(),
+                dto.getQty(),
                 dto.getPrice()
         ));
     }
@@ -46,6 +48,7 @@ public class AdditionalItemBoImpl implements AdditionalItemBo {
             list.add(new AdditionalItemDto(
                     additionalItem.getItemCode(),
                     additionalItem.getName(),
+                    additionalItem.getQty(),
                     additionalItem.getPrice()
             ));
         }

@@ -101,5 +101,6 @@
             </font>
         </JFXButton>
         <TextField fx:id="txtSearch" layoutX="315.0" layoutY="104.0" prefHeight="39.0" prefWidth="316.0" promptText="Search Here" />
+      <Label fx:id="lblOrderId" layoutX="995.0" layoutY="106.0" prefHeight="31.0" prefWidth="97.0" />
     </children>
 </AnchorPane>

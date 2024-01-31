@@ -34,6 +34,7 @@ public class OrderDetail {
         return id.getItemCode();
     }
 
-
+    private int qty;
+    private  double price;
 
 }

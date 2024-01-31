@@ -15,10 +15,18 @@ public class OrderDto {
     private String date;
     private String custId;
 
-    public OrderDto(String orderId, String date, String custId) {
+    private String category;
+    private String subCategory;
+    private String description;
+
+    public OrderDto(String orderId, String date, String custId,String category,String subCategory,String description) {
         this.orderId = orderId;
         this.date = date;
         this.custId = custId;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.description = description;
+
     }
 
     private List<OrderDetailDto> list;

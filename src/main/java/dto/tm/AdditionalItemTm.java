@@ -11,6 +11,7 @@ import lombok.*;
 public class AdditionalItemTm {
     private String itemCode;
     private String name;
+    private int qty;
     private double price;
     private JFXButton btn;
 

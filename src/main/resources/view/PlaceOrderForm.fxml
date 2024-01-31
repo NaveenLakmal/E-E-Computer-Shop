@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="806.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlaceOrderFormController">
@@ -50,12 +51,13 @@
             <Image url="@../asset/images/back.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblPlaceOrder" layoutX="104.0" layoutY="363.0" prefHeight="360.0" prefWidth="983.0">
+      <TableView fx:id="tblPlaceOrder" layoutX="674.0" layoutY="355.0" prefHeight="263.0" prefWidth="497.0">
          <columns>
-            <TableColumn fx:id="colItemCode" prefWidth="161.0" text="Item Code" />
-            <TableColumn fx:id="colSubCategory" prefWidth="225.0" text="Sub Category" />
-            <TableColumn fx:id="colDescription" prefWidth="394.0" text="Description" />
-            <TableColumn fx:id="colOption" prefWidth="200.0" text="Option" />
+            <TableColumn fx:id="colItemCode" prefWidth="79.0" text="A_Item" />
+            <TableColumn fx:id="colSubItemName" prefWidth="128.0" text="Name" />
+            <TableColumn fx:id="colSubItemPrice" prefWidth="129.0" text="Price" />
+            <TableColumn fx:id="colSubItemQty" prefWidth="82.0" text="QTY" />
+            <TableColumn fx:id="colOption" prefWidth="82.0" text="Option" />
          </columns>
       </TableView>
       <Label layoutX="60.0" layoutY="132.0" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text=" Customer ID" textAlignment="RIGHT">
@@ -68,7 +70,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="586.0" layoutY="227.0" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Description" textAlignment="RIGHT">
+      <Label layoutX="737.0" layoutY="117.0" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Name" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -78,29 +80,62 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="txtSubCategory" layoutX="278.0" layoutY="263.0" prefHeight="31.0" prefWidth="207.0" />
+      <JFXTextField fx:id="txtSubItemPrice" layoutX="1049.0" layoutY="148.0" prefHeight="31.0" prefWidth="116.0" />
       <JFXButton layoutX="977.0" layoutY="734.0" onAction="#placeOrderButtonOnAction" prefHeight="46.0" prefWidth="142.0" style="-fx-background-color: #ff0040;" text="Place Order">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </JFXButton>
       <JFXComboBox fx:id="cmbCustId" layoutX="60.0" layoutY="163.0" prefHeight="31.0" prefWidth="116.0" />
-      <JFXComboBox fx:id="cmbItemCode" layoutX="60.0" layoutY="263.0" prefHeight="31.0" prefWidth="116.0" />
-      <Label layoutX="60.0" layoutY="221.0" prefHeight="31.0" prefWidth="142.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Additional Item" textAlignment="RIGHT">
+      <JFXComboBox fx:id="cmbItemCode" layoutX="622.0" layoutY="148.0" prefHeight="31.0" prefWidth="82.0" />
+      <Label layoutX="622.0" layoutY="117.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="A_Item" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <JFXTextField fx:id="txtCustName" layoutX="292.0" layoutY="162.0" prefHeight="31.0" prefWidth="207.0" />
-      <Label layoutX="292.0" layoutY="221.0" prefHeight="31.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text=" Sub Category" textAlignment="RIGHT">
+      <Label layoutX="1066.0" layoutY="117.0" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Price" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtDescription" layoutX="586.0" layoutY="263.0" prefHeight="31.0" prefWidth="245.0" />
-      <Label fx:id="lblOrderId" layoutX="991.0" layoutY="112.0" prefHeight="34.0" prefWidth="107.0">
+      <JFXTextField fx:id="txtSubItemName" layoutX="737.0" layoutY="148.0" prefHeight="31.0" prefWidth="154.0" />
+      <Label fx:id="lblOrderId" layoutX="853.0" layoutY="231.0" prefHeight="34.0" prefWidth="107.0">
          <font>
             <Font name="System Bold" size="23.0" />
          </font></Label>
+      <Line endX="-44.0" endY="-64.0" layoutX="655.0" layoutY="263.0" startX="-44.0" startY="-168.0" />
+      <TableView fx:id="tblItem" layoutX="78.0" layoutY="517.0" prefHeight="263.0" prefWidth="532.0">
+         <columns>
+            <TableColumn fx:id="colOrderCode" prefWidth="85.0" text="Order ID" />
+            <TableColumn fx:id="colProduct" prefWidth="149.0" text="        Prduct" />
+            <TableColumn fx:id="colDate" prefWidth="136.0" text="Date" />
+            <TableColumn fx:id="colTotal" prefWidth="160.0" text="Total" />
+         </columns>
+      </TableView>
+      <JFXTextField fx:id="txtDescription" layoutX="495.0" layoutY="395.0" prefHeight="31.0" prefWidth="154.0" />
+      <JFXComboBox fx:id="cmbCategory" layoutX="40.0" layoutY="387.0" prefHeight="39.0" prefWidth="129.0" />
+      <JFXTextField fx:id="txtSubCategory" layoutX="228.0" layoutY="391.0" prefHeight="31.0" prefWidth="179.0" />
+      <Label layoutX="40.0" layoutY="340.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="  Category" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="228.0" layoutY="340.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="  Sub Category" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="495.0" layoutY="340.0" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="  Description" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="919.0" layoutY="117.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="QTY" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtQty" layoutX="919.0" layoutY="147.0" prefHeight="31.0" prefWidth="82.0" />
    </children>
 </AnchorPane>

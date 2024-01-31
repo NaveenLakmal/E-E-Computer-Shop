@@ -11,6 +11,7 @@ public class AdditionalItemDto {
 
     private String itemCode;
     private String name;
+    private int qty;
     private double price;
 
 }

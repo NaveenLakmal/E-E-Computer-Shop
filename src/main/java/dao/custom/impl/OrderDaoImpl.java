@@ -21,7 +21,10 @@ public class OrderDaoImpl implements OrderDao {
         Transaction transaction = session.beginTransaction();
         Orders order = new Orders(
                 dto.getOrderId(),
-                dto.getDate()
+                dto.getDate(),
+                dto.getCategory(),
+                dto.getDescription(),
+                dto.getSubCategory()
         );
         order.setCustomer(session.find(Customer.class,dto.getCustId()));
         session.save(order);
@@ -32,7 +35,9 @@ public class OrderDaoImpl implements OrderDao {
             OrderDetail orderDetail = new OrderDetail(
                     new OrderDetailsKey(detailDto.getOrderId(), detailDto.getItemCode()),
                     session.find(AdditionalItem.class, detailDto.getItemCode()),
-                    order
+                    order,
+                    detailDto.getQty(),
+                    detailDto.getPrice()
 
 
             );
@@ -69,6 +74,9 @@ public class OrderDaoImpl implements OrderDao {
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
                     null
             );
         }

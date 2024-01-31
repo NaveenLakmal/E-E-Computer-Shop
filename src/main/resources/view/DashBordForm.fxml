@@ -41,7 +41,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="57.0" layoutY="423.0" onAction="#ordersBtnOnAction" prefHeight="50.0" prefWidth="149.0" style="-fx-background-color: #08ff10;" text="Orders" textFill="#0000f4">
+      <JFXButton layoutX="57.0" layoutY="423.0" onAction="#ordersBtnOnAction" prefHeight="51.0" prefWidth="170.0" style="-fx-background-color: #08ff10;" text="Edit Orders" textFill="#0000f4">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

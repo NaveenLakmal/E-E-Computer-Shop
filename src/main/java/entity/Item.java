@@ -13,14 +13,14 @@ import javax.persistence.Id;
 public class Item {
     @Id
     private String itemCode;
-    private String category;
-    private String subCategory;
-    private String description;
+    private String itemName;
+    private double price;
+    //private String description;
 
-    public Item(String itemCode, String category, String subCategory, String description) {
+    public Item(String itemCode, String itemName, double price) {
         this.itemCode = itemCode;
-        this.category = category;
-        this.subCategory = subCategory;
-        this.description = description;
+        this.itemName = itemName;
+        this.price = price;
+
     }
 }

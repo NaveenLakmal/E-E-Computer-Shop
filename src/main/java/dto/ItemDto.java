@@ -1,5 +1,6 @@
 package dto;
 
+import com.jfoenix.controls.JFXButton;
 import lombok.*;
 
 @AllArgsConstructor
@@ -10,8 +11,10 @@ import lombok.*;
 public class ItemDto {
 
     private String itemCode;
-    private String category;
-    private String subCategory;
-    private String description;
+    private String name;
+    private double price;
+
+
+
 
 }

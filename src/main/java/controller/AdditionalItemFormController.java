@@ -43,6 +43,8 @@ public class AdditionalItemFormController {
     public JFXTextField txtItemName;
     public TableColumn colName;
     public TableColumn colPrice;
+    public JFXTextField txtQty;
+    public TableColumn colQty;
 
     private AdditionalItemBo additionalItemBo = BoFactory.getInstance().getBo(BoType.ADDITIONALITEM);
 
@@ -56,6 +58,7 @@ public class AdditionalItemFormController {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         loadItemTable();
 
         tblItem.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -93,6 +96,7 @@ public class AdditionalItemFormController {
         txtItemCode.clear();
         txtItemName.clear();
         txtItemPrice.clear();
+        txtQty.clear();
         txtItemCode.setEditable(true);
     }
 
@@ -101,7 +105,8 @@ public class AdditionalItemFormController {
             txtItemCode.setEditable(false);
             txtItemCode.setText(newValue.getItemCode());
             txtItemName.setText(newValue.getName());
-            txtItemPrice.setText(newValue.getPrice()+"");
+            txtQty.setText(String.valueOf(newValue.getQty()));
+            txtItemPrice.setText(String.valueOf(newValue.getPrice()));
         }
     }
 
@@ -151,6 +156,7 @@ public class AdditionalItemFormController {
                 AdditionalItemTm c = new AdditionalItemTm(
                         dto.getItemCode(),
                         dto.getName(),
+                        dto.getQty(),
                         dto.getPrice(),
                         btn
                 );
@@ -182,6 +188,7 @@ public class AdditionalItemFormController {
 
         AdditionalItemDto dto = new AdditionalItemDto(txtItemCode.getText(),
                 txtItemName.getText(),
+                Integer.parseInt(txtQty.getText()),
                 Double.parseDouble(txtItemPrice.getText())
         );
 
@@ -204,6 +211,7 @@ public class AdditionalItemFormController {
 
         AdditionalItemDto dto = new AdditionalItemDto(txtItemCode.getText(),
                 txtItemName.getText(),
+                Integer.parseInt(txtQty.getText()),
                 Double.parseDouble(txtItemPrice.getText())
         );
 
