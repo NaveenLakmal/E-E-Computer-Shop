@@ -137,5 +137,7 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtQty" layoutX="919.0" layoutY="147.0" prefHeight="31.0" prefWidth="82.0" />
+      <JFXTextField fx:id="txtOrderId" layoutX="124.0" layoutY="250.0" />
+      <JFXButton layoutX="750.0" layoutY="286.0" onAction="#updateButtonOnAction" prefHeight="39.0" prefWidth="101.0" text="Update" />
    </children>
 </AnchorPane>

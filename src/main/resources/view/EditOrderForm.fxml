@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="806.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditOrderFormController">
+   <children>
+      <TableView fx:id="tblOrders" layoutX="31.0" layoutY="515.0" prefHeight="263.0" prefWidth="694.0">
+         <columns>
+            <TableColumn fx:id="colOrderCode" prefWidth="85.0" text="Order ID" />
+            <TableColumn fx:id="colProduct" prefWidth="149.0" text="        Prduct" />
+            <TableColumn fx:id="colDate" prefWidth="136.0" text="Date" />
+            <TableColumn fx:id="colDescription" prefWidth="160.0" text="Description" />
+            <TableColumn fx:id="colTotal" prefWidth="160.0" text="Total" />
+         </columns>
+      </TableView>
+      <JFXTextField fx:id="txtDescription" layoutX="438.0" layoutY="261.0" prefHeight="31.0" prefWidth="154.0" />
+      <JFXTextField fx:id="txtSubCategory" layoutX="225.0" layoutY="261.0" prefHeight="31.0" prefWidth="179.0" />
+      <Label layoutX="225.0" layoutY="211.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="  Sub Category" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="438.0" layoutY="211.0" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="  Description" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtOrderId" layoutX="24.0" layoutY="261.0" />
+      <Label layoutX="24.0" layoutY="211.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="id" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

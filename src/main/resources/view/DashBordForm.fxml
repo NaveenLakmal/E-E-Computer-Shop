@@ -74,5 +74,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <JFXButton layoutX="57.0" layoutY="588.0" onAction="#editButtonOnAction" prefHeight="50.0" prefWidth="149.0" style="-fx-background-color: #08ff10;" text="Edit Order" textFill="#0000f4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>

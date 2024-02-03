@@ -27,6 +27,12 @@ public class OrderDetail {
     @JoinColumn(name = "order_id")
     Orders orders;
 
+    public OrderDetail(OrderDetailsKey id, AdditionalItem additionalItem, Orders orders) {
+        this.id = id;
+        this.additionalItem = additionalItem;
+        this.orders = orders;
+    }
+
     public String getOrderId() {
         return id.getOrderId();
     }

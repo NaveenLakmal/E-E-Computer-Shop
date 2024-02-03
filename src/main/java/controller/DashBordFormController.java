@@ -105,4 +105,16 @@ public class DashBordFormController {
             throw new RuntimeException(e);
         }
     }
+
+    public void editButtonOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) lblDate.getScene().getWindow();
+        stage.setTitle("Register Form");
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/EditOrderForm.fxml"))));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

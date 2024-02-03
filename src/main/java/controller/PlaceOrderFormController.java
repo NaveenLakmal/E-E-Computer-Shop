@@ -67,6 +67,7 @@ public class PlaceOrderFormController {
 
     public JFXTextField txtQty;
     public TableColumn colSubItemQty;
+    public JFXTextField txtOrderId;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
 
     private CustomerBo customerBo = new CustomerBoImpl();
@@ -150,7 +151,8 @@ public class PlaceOrderFormController {
 
     private void setOrderId() {
         try {
-            lblOrderId.setText(orderBo.generateId());
+            txtOrderId.setText(orderBo.generateId());
+            //txtOrderId.setEditable(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -248,7 +250,7 @@ public class PlaceOrderFormController {
         }
 
         OrderDto dto = new OrderDto(
-                lblOrderId.getText(),
+                txtOrderId.getText(),
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")),
                 cmbCustId.getValue().toString(),
                 cmbCategory.getValue().toString(),
@@ -260,6 +262,45 @@ public class PlaceOrderFormController {
 
         try {
             boolean isSaved = orderBo.saveOrder(dto);
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION, "Order Saved!").show();
+                setOrderId();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void updateButtonOnAction(ActionEvent actionEvent) {
+        List<OrderDetailDto> list = new ArrayList<>();
+
+        for (AdditionalItemTm tm : tmList) {
+            list.add(new OrderDetailDto(
+                    lblOrderId.getText(),
+                    tm.getItemCode(),
+                    tm.getQty(),
+                    tm.getPrice()
+            ));
+        }
+
+        OrderDto dto = new OrderDto(
+                txtOrderId.getText(),
+                /*LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")),*/
+                cmbCustId.getValue().toString(),
+                cmbCategory.getValue().toString(),
+                txtSubCategory.getText(),
+                txtDescription.getText(),
+                list
+        );
+
+
+        try {
+            boolean isSaved = orderBo.updateOrder(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, "Order Saved!").show();
                 setOrderId();

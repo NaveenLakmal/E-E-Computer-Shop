@@ -19,4 +19,8 @@ public class OrderDetailsKey implements Serializable {
     private String orderId;
     @Column(name = "item_code")
     private String itemCode;
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
 }

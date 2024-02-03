@@ -16,6 +16,11 @@ public class OrderBoImpl implements OrderBo {
     }
 
     @Override
+    public boolean updateOrder(OrderDto dto) throws SQLException, ClassNotFoundException {
+        return orderDao.update(dto);
+    }
+
+    @Override
     public String generateId() throws SQLException, ClassNotFoundException {
         try {
             OrderDto dto = orderDao.getLastOrder();
@@ -36,6 +41,7 @@ public class OrderBoImpl implements OrderBo {
 
     @Override
     public List<OrderDto> allOrder() throws SQLException, ClassNotFoundException {
-        return null;
+        List<OrderDto> entityList = orderDao.getAll();
+        return entityList;
     }
 }
