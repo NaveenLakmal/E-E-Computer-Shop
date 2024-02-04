@@ -83,20 +83,15 @@ public class PlaceOrderFormController {
         ObservableList list = FXCollections.observableArrayList("Electronic", "Electrical");
         cmbCategory.setItems(list);
 
-        colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
-        colSubItemName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colSubItemPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        colSubItemQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
 
-        colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
 
         try {
             customers = customerBo.allCustomer();
-            items = itemsBo.allItems();
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        loadItemCodes();
+        //loadItemCodes();
         loadCustomerIds();
 
         cmbCustId.getSelectionModel().selectedItemProperty().addListener((observableValue, o, newValue) -> {
@@ -107,14 +102,14 @@ public class PlaceOrderFormController {
             }
         });
 
-        cmbItemCode.getSelectionModel().selectedItemProperty().addListener((observableValue, o, newValue) -> {
-            for (AdditionalItemDto dto : items) {
-                if (dto.getItemCode().equals(newValue.toString())) {
-                    txtSubItemName.setText(dto.getName());
-                    txtSubItemPrice.setText(dto.getPrice() + "");
-                }
-            }
-        });
+//        cmbItemCode.getSelectionModel().selectedItemProperty().addListener((observableValue, o, newValue) -> {
+//            for (AdditionalItemDto dto : items) {
+//                if (dto.getItemCode().equals(newValue.toString())) {
+//                    txtSubItemName.setText(dto.getName());
+//                    txtSubItemPrice.setText(dto.getPrice() + "");
+//                }
+//            }
+//        });
 
         setOrderId();
 
@@ -151,7 +146,7 @@ public class PlaceOrderFormController {
 
     private void setOrderId() {
         try {
-            txtOrderId.setText(orderBo.generateId());
+            lblOrderId.setText(orderBo.generateId());
             //txtOrderId.setEditable(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -250,7 +245,7 @@ public class PlaceOrderFormController {
         }
 
         OrderDto dto = new OrderDto(
-                txtOrderId.getText(),
+                lblOrderId.getText(),
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")),
                 cmbCustId.getValue().toString(),
                 cmbCategory.getValue().toString(),
@@ -289,10 +284,7 @@ public class PlaceOrderFormController {
         }
 
         OrderDto dto = new OrderDto(
-                txtOrderId.getText(),
-                /*LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")),*/
-                cmbCustId.getValue().toString(),
-                cmbCategory.getValue().toString(),
+                lblOrderId.getText(),
                 txtSubCategory.getText(),
                 txtDescription.getText(),
                 list

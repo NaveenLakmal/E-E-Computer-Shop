@@ -126,8 +126,8 @@ public class OrderDaoImpl implements OrderDao {
         for (Orders orders:ordersList) {
             orderDtoList.add(new OrderDto(
                     orders.getOrderId(),
-                    orders.getSubCategory(),
                     orders.getDate(),
+                    orders.getSubCategory(),
                     orders.getDescription()
 
             ));

@@ -26,10 +26,10 @@ public class OrderDto {
         this.description = description;
     }
 
-    public OrderDto(String orderId, String custId, String category, String subCategory, String description, List<OrderDetailDto> list) {
+    public OrderDto(String orderId,  String subCategory, String description, List<OrderDetailDto> list) {
         this.orderId = orderId;
-        this.custId = custId;
-        this.category = category;
+
+
         this.subCategory = subCategory;
         this.description = description;
         this.list = list;
