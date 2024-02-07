@@ -26,7 +26,9 @@ public class OrderDaoImpl implements OrderDao {
                 dto.getDate(),
                 dto.getCategory(),
                 dto.getDescription(),
-                dto.getSubCategory()
+                dto.getSubCategory(),
+                dto.getTotal(),
+                dto.getStatus()
         );
         order.setCustomer(session.find(Customer.class,dto.getCustId()));
         session.save(order);
@@ -83,8 +85,12 @@ public class OrderDaoImpl implements OrderDao {
                         );
                         session.save(newOrderDetail);
                     } else {
-                        existingOrderDetail.setQty(detailDto.getQty());
-                        existingOrderDetail.setPrice(detailDto.getPrice());
+                        //existingOrderDetail.setQty(detailDto.getQty());
+                        int newQty = existingOrderDetail.getQty() + detailDto.getQty();
+                        existingOrderDetail.setQty(newQty);
+                        //existingOrderDetail.setPrice(detailDto.getPrice());
+                        double newPrice = existingOrderDetail.getPrice() + detailDto.getPrice();
+                        existingOrderDetail.setPrice(newPrice);
                     }
                 }
 
@@ -92,6 +98,7 @@ public class OrderDaoImpl implements OrderDao {
                 //orderToUpdate.setCategory(dto.getCategory());
                 orderToUpdate.setDescription(dto.getDescription());
                 orderToUpdate.setSubCategory(dto.getSubCategory());
+                orderToUpdate.setTotal(dto.getTotal());
                 //orderToUpdate.setCustomer(session.find(Customer.class, dto.getCustId()));
 
                 session.update(orderToUpdate);
@@ -128,7 +135,8 @@ public class OrderDaoImpl implements OrderDao {
                     orders.getOrderId(),
                     orders.getDate(),
                     orders.getSubCategory(),
-                    orders.getDescription()
+                    orders.getDescription(),
+                    orders.getTotal()
 
             ));
 
@@ -152,6 +160,8 @@ public class OrderDaoImpl implements OrderDao {
                     resultSet.getString(4),
                     resultSet.getString(5),
                     resultSet.getString(6),
+                    resultSet.getDouble(7),
+                    resultSet.getString(8),
                     null
             );
         }

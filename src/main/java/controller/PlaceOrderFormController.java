@@ -84,7 +84,6 @@ public class PlaceOrderFormController {
         cmbCategory.setItems(list);
 
 
-
         try {
             customers = customerBo.allCustomer();
 
@@ -251,6 +250,8 @@ public class PlaceOrderFormController {
                 cmbCategory.getValue().toString(),
                 txtSubCategory.getText(),
                 txtDescription.getText(),
+                0.00,     /*Total*/
+                "Processing",
                 list
         );
 
@@ -271,7 +272,7 @@ public class PlaceOrderFormController {
 
     }
 
-    public void updateButtonOnAction(ActionEvent actionEvent) {
+   /* public void updateButtonOnAction(ActionEvent actionEvent) {
         List<OrderDetailDto> list = new ArrayList<>();
 
         for (AdditionalItemTm tm : tmList) {
@@ -305,5 +306,5 @@ public class PlaceOrderFormController {
             throw new RuntimeException(e);
         }
 
-    }
+    }*/
 }

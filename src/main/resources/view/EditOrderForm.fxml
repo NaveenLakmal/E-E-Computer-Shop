@@ -9,11 +9,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="806.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditOrderFormController">
    <children>
-      <TableView fx:id="tblOrders" layoutX="14.0" layoutY="515.0" prefHeight="263.0" prefWidth="618.0">
+      <TableView fx:id="tblOrders" layoutX="14.0" layoutY="336.0" prefHeight="263.0" prefWidth="618.0">
          <columns>
             <TableColumn fx:id="colOrderCode" prefWidth="85.0" text="Order ID" />
             <TableColumn fx:id="colProduct" prefWidth="149.0" text="        Prduct" />
@@ -35,12 +38,12 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtOrderId" layoutX="25.0" layoutY="173.0" />
-      <Label layoutX="25.0" layoutY="123.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="id" textAlignment="RIGHT">
+      <Label layoutX="25.0" layoutY="123.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="         id" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="tblOrderDetail" layoutX="729.0" layoutY="485.0" prefHeight="293.0" prefWidth="341.0">
+      <TableView fx:id="tblOrderDetail" layoutX="687.0" layoutY="561.0" prefHeight="224.0" prefWidth="341.0">
         <columns>
           <TableColumn fx:id="colOrderId" prefWidth="87.0" text="Order ID" />
           <TableColumn fx:id="colItemCode" prefWidth="86.0" text="Item Code" />
@@ -53,44 +56,99 @@
             <Image url="@../asset/images/back.png" />
          </image>
       </ImageView>
-      <Label layoutX="703.0" layoutY="45.0" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Name" textAlignment="RIGHT">
+      <Label layoutX="701.0" layoutY="114.0" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Name" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtSubItemPrice" layoutX="1015.0" layoutY="76.0" prefHeight="31.0" prefWidth="116.0" />
-      <JFXComboBox fx:id="cmbItemCode" layoutX="588.0" layoutY="76.0" prefHeight="31.0" prefWidth="82.0" />
-      <Label layoutX="588.0" layoutY="45.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="A_Item" textAlignment="RIGHT">
+      <JFXTextField fx:id="txtSubItemPrice" layoutX="1013.0" layoutY="145.0" prefHeight="31.0" prefWidth="116.0" />
+      <JFXComboBox fx:id="cmbItemCode" layoutX="586.0" layoutY="145.0" prefHeight="31.0" prefWidth="82.0" />
+      <Label layoutX="586.0" layoutY="114.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="A_Item" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="1032.0" layoutY="45.0" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Price" textAlignment="RIGHT">
+      <Label layoutX="1030.0" layoutY="114.0" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Price" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtSubItemName" layoutX="703.0" layoutY="76.0" prefHeight="31.0" prefWidth="154.0" />
-      <Label layoutX="885.0" layoutY="45.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="QTY" textAlignment="RIGHT">
+      <JFXTextField fx:id="txtSubItemName" layoutX="701.0" layoutY="145.0" prefHeight="31.0" prefWidth="154.0" />
+      <Label layoutX="883.0" layoutY="114.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="QTY" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtQty" layoutX="885.0" layoutY="75.0" prefHeight="31.0" prefWidth="82.0" />
-      <TableView fx:id="tblPlaceOrder" layoutX="609.0" layoutY="211.0" prefHeight="263.0" prefWidth="497.0">
+      <JFXTextField fx:id="txtQty" layoutX="883.0" layoutY="144.0" prefHeight="31.0" prefWidth="82.0" />
+      <TableView fx:id="tblPlaceOrder" layoutX="678.0" layoutY="290.0" prefHeight="263.0" prefWidth="444.0">
          <columns>
-            <TableColumn fx:id="colSubItemCode" prefWidth="79.0" text="A_Item" />
-            <TableColumn fx:id="colSubItemName" prefWidth="128.0" text="Name" />
-            <TableColumn fx:id="colSubItemPrice" prefWidth="129.0" text="Price" />
-            <TableColumn fx:id="colSubItemQty" prefWidth="82.0" text="QTY" />
-            <TableColumn fx:id="colOption" prefWidth="82.0" text="Option" />
+            <TableColumn fx:id="colSubItemCode" prefWidth="60.0" text="A_Item" />
+            <TableColumn fx:id="colSubItemName" prefWidth="147.0" text="Name" />
+            <TableColumn fx:id="colSubItemPrice" prefWidth="82.0" text="Price" />
+            <TableColumn fx:id="colSubItemQty" prefWidth="65.0" text="QTY" />
+            <TableColumn fx:id="colOption" prefWidth="87.0" text="Option" />
          </columns>
       </TableView>
-      <JFXButton layoutX="951.0" layoutY="148.0" onAction="#addToCartButtonOnAction" prefHeight="46.0" prefWidth="142.0" style="-fx-background-color: #0080ff; -fx-background-radius: 5px;" text="Add To Cart">
+      <JFXButton layoutX="949.0" layoutY="217.0" onAction="#addToCartButtonOnAction" prefHeight="46.0" prefWidth="142.0" style="-fx-background-color: #0080ff; -fx-background-radius: 5px;" text="Add To Cart">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="799.0" layoutY="155.0" onAction="#updateButtonOnAction" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: yellow;" text="Update" />
+      <JFXButton layoutX="797.0" layoutY="224.0" onAction="#updateButtonOnAction" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: yellow;" text="Update" />
+      <Label fx:id="lblTotal" layoutX="39.0" layoutY="654.0" prefHeight="39.0" prefWidth="101.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font></Label>
+      <GridPane layoutX="2.0" prefHeight="93.0" prefWidth="1192.0" style="-fx-background-color: #40a4c2;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="7.0" prefWidth="78.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="298.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="471.0" minWidth="10.0" prefWidth="409.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="66.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="10.0" prefWidth="302.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefHeight="106.0" prefWidth="291.0" text="    E &amp; E Service" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="59.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@../asset/images/customer.png" />
+               </image>
+            </ImageView>
+            <Label prefHeight="75.0" prefWidth="245.0" text="Edit Order" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <GridPane GridPane.columnIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <ImageView fx:id="imgBack1" fitHeight="59.0" fitWidth="60.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/back.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <Label layoutX="39.0" layoutY="620.0" prefHeight="39.0" prefWidth="101.0" text="Total">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

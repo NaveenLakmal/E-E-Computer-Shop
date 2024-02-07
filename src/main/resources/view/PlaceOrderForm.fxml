@@ -85,7 +85,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXButton layoutX="968.0" layoutY="662.0" onAction="#placeOrderButtonOnAction" prefHeight="46.0" prefWidth="142.0" style="-fx-background-color: #ff0040;" text="Place Order">
+      <JFXButton layoutX="621.0" layoutY="679.0" onAction="#placeOrderButtonOnAction" prefHeight="46.0" prefWidth="142.0" style="-fx-background-color: #ff0040;" text="Place Order">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -94,12 +94,12 @@
       <JFXTextField fx:id="txtCustName" layoutX="248.0" layoutY="162.0" prefHeight="31.0" prefWidth="207.0" />
 
          
-      <TableView fx:id="tblItem" layoutX="180.0" layoutY="395.0" prefHeight="313.0" prefWidth="746.0">
+      <TableView fx:id="tblItem" layoutX="180.0" layoutY="395.0" prefHeight="255.0" prefWidth="575.0">
          <columns>
-            <TableColumn fx:id="colOrderCode" prefWidth="85.0" text="Order ID" />
-            <TableColumn fx:id="colProduct" prefWidth="149.0" text="        Prduct" />
-            <TableColumn fx:id="colDate" prefWidth="136.0" text="Date" />
-            <TableColumn fx:id="colTotal" prefWidth="160.0" text="Total" />
+            <TableColumn fx:id="colOrderCode" prefWidth="112.0" text="Order ID" />
+            <TableColumn fx:id="colProduct" prefWidth="185.0" text="        Prduct" />
+            <TableColumn fx:id="colDate" prefWidth="147.0" text="Date" />
+            <TableColumn fx:id="colTotal" prefWidth="129.0" text="Total" />
          </columns>
       </TableView>
       <JFXTextField fx:id="txtDescription" layoutX="439.0" layoutY="320.0" prefHeight="31.0" prefWidth="154.0" />
@@ -120,7 +120,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtOrderId" layoutX="769.0" layoutY="221.0" />
       <Line endX="366.0" layoutX="109.0" layoutY="231.0" startX="-78.0" stroke="#1df3ff" style="-fx-stroke-width: 10px;" />
       <Line endX="171.0" endY="-117.0" layoutX="307.0" layoutY="230.0" startX="171.0" startY="1.0" stroke="#1df3ff" style="-fx-stroke-width: 10px;" />
       <Line endX="-85.0" endY="-134.0" layoutX="115.0" layoutY="246.0" startX="-85.0" startY="-15.0" stroke="#1df3ff" style="-fx-stroke-width: 10px;" />

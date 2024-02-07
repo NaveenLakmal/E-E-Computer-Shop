@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -59,6 +60,10 @@ public class EditOrderFormController {
     public TableColumn colSubItemPrice;
     public TableColumn colSubItemQty;
     public TableColumn colOption;
+    public Label lblTotal;
+
+    private double total = 0;
+    private  double previousTotal;
 
     private List<AdditionalItemDto> items;
     private AdditionalItemBo itemsBo = new AdditionalItemBoImpl();
@@ -73,7 +78,7 @@ public class EditOrderFormController {
         colProduct.setCellValueFactory(new PropertyValueFactory<>("subCategory"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        //colTotal.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         loadOrderTable();
 
         colOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
@@ -129,6 +134,8 @@ public class EditOrderFormController {
             txtOrderId.setText(newValue.getOrderId());
             txtSubCategory.setText(newValue.getSubCategory());
             txtDescription.setText(newValue.getDescription());
+            lblTotal.setText(String.valueOf(newValue.getTotal()));
+            previousTotal=newValue.getTotal();
             //txtEmail.setText(newValue.getEmail());
             loadOrderDetailTable();
 
@@ -150,7 +157,8 @@ public class EditOrderFormController {
                         dto.getOrderId(),
                         dto.getDate(),
                         dto.getSubCategory(),
-                        dto.getDescription()
+                        dto.getDescription(),
+                        dto.getTotal()
 
 
                 );
@@ -181,17 +189,17 @@ public class EditOrderFormController {
 
 
             for (OrderDetailDto dto : dtoList) {
-
-                OrderDetailDto c = new OrderDetailDto(
-                        dto.getOrderId(),
-                        dto.getItemCode(),
-                        dto.getQty(),
-                        dto.getPrice()
+                if(txtOrderId.getText().equals(dto.getOrderId())) {
+                    OrderDetailDto c = new OrderDetailDto(
+                            dto.getOrderId(),
+                            dto.getItemCode(),
+                            dto.getQty(),
+                            dto.getPrice()
 
                 );
                 // System.out.println("" + c);
 
-                if(txtOrderId.getText().equals(dto.getOrderId())) {
+
                     tmList.add(c);
                 }
             }
@@ -202,6 +210,18 @@ public class EditOrderFormController {
         }
 
 
+    }
+
+    private void clearFields() {
+        tblPlaceOrder.getItems().clear();
+        cmbItemCode.setValue(null);
+        txtSubItemName.clear();
+        txtQty.clear();
+        txtSubItemPrice.clear();
+        txtSubCategory.clear();
+        txtDescription.clear();
+
+        //txtOrderId.setEditable(true);
     }
 
     public void goBack(MouseEvent mouseEvent) {
@@ -215,6 +235,7 @@ public class EditOrderFormController {
     }
 
     public void addToCartButtonOnAction(ActionEvent event) {
+
         JFXButton btn = new JFXButton("Delete");
 
         AdditionalItemTm tm = new AdditionalItemTm(
@@ -226,9 +247,10 @@ public class EditOrderFormController {
         );
         btn.setOnAction(actionEvent -> {
             tmList.remove(tm);
-
-
+            total -= tm.getPrice();
+            lblTotal.setText(String.format("%.2f", total));
             tblPlaceOrder.refresh();
+            tblOrders.refresh();
         });
 
         boolean isExist = false;
@@ -237,15 +259,21 @@ public class EditOrderFormController {
                 order.setQty(order.getQty() + tm.getQty());
                 order.setPrice(order.getPrice() + tm.getPrice());
                 isExist = true;
-                System.out.println(isExist);
-                //total += tm.getAmount();
+                tblPlaceOrder.refresh();
+                tblOrders.refresh();
+                total += tm.getPrice();
             }
         }
 
         if (!isExist) {
             tmList.add(tm);
-            tblPlaceOrder.setItems(tmList);
+            total += tm.getPrice();
         }
+
+        lblTotal.setText(String.format("%.2f", total+previousTotal));
+        tblPlaceOrder.setItems(tmList);
+        tblOrders.refresh();
+
     }
 
     public void updateButtonOnAction(ActionEvent actionEvent) {
@@ -265,14 +293,20 @@ public class EditOrderFormController {
                 /*LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")),*/
                 txtSubCategory.getText(),
                 txtDescription.getText(),
+                Double.parseDouble(lblTotal.getText()),
                 list
         );
 
 
         try {
-            boolean isSaved = orderBo.updateOrder(dto);
-            if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION, "Order Saved!").show();
+            boolean isUpdated = orderBo.updateOrder(dto);
+
+            if (isUpdated) {
+                new Alert(Alert.AlertType.INFORMATION, "Order Updated!").show();
+                loadOrderTable();
+                loadOrderDetailTable();
+                //clearFields();
+
 
             } else {
                 new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
