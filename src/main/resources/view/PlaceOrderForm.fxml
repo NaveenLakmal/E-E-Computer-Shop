@@ -56,7 +56,7 @@
                         <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label fx:id="lblOrderId" prefHeight="34.0" prefWidth="134.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="lblOrderId" prefHeight="34.0" prefWidth="134.0" text="g" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <font>
                                 <Font name="System Bold Italic" size="30.0" />
                             </font>
@@ -94,7 +94,7 @@
         <JFXTextField fx:id="txtCustName" layoutX="248.0" layoutY="162.0" prefHeight="31.0" prefWidth="207.0" />
 
 
-        <TableView fx:id="tblItem" layoutX="180.0" layoutY="395.0" prefHeight="255.0" prefWidth="575.0">
+        <TableView fx:id="tblOrder" layoutX="180.0" layoutY="395.0" prefHeight="255.0" prefWidth="575.0">
             <columns>
                 <TableColumn fx:id="colOrderCode" prefWidth="112.0" text="Order ID" />
                 <TableColumn fx:id="colProduct" prefWidth="185.0" text="        Prduct" />

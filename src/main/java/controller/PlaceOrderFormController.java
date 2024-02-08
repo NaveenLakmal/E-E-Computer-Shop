@@ -75,6 +75,10 @@ public class PlaceOrderFormController {
     public Label lblTime;
     public Label lblDate;
     public ImageView imgOrderStatus;
+    public TableView tblOrder;
+    public TableColumn colOrderCode;
+    public TableColumn colProduct;
+    public TableColumn colTotal;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
 
     private CustomerBo customerBo = new CustomerBoImpl();
@@ -91,6 +95,13 @@ public class PlaceOrderFormController {
 
         ObservableList list = FXCollections.observableArrayList("Electronic", "Electrical");
         cmbCategory.setItems(list);
+
+
+        colOrderCode.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        colProduct.setCellValueFactory(new PropertyValueFactory<>("subCategory"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+        loadOrderTable();
 
 
         try {
@@ -173,36 +184,41 @@ public class PlaceOrderFormController {
         }
     }
 
-    /*private void loadItemTable() {
-        ObservableList<ItemTm> tmList = FXCollections.observableArrayList();
+    private void loadOrderTable() {
+        ObservableList<OrderDto> tmList = FXCollections.observableArrayList();
 
         try {
-            List<ItemDto> dtoList  = itemBo.allItems();
-            for (ItemDto dto:dtoList) {
-                JFXButton btn = new JFXButton("Delete");
-                btn.setStyle("-fx-background-color: #ff4d79;"); // Set the background color to red
-                btn.setPrefWidth(90); // Set preferred width
-                btn.setPrefHeight(32); // Set preferred height
 
-                ItemTm c = new ItemTm(
-                        dto.getItemCode(),
-                        dto.getCategory(),
+            List<OrderDto> dtoList = orderBo.allOrder();
+
+
+
+            for (OrderDto dto : dtoList) {
+
+                OrderDto c = new OrderDto(
+                        dto.getOrderId(),
+                        dto.getDate(),
                         dto.getSubCategory(),
                         dto.getDescription(),
-                        btn
+                        dto.getTotal(),
+                        dto.getStatus()
+
+
                 );
 
-                /*btn.setOnAction(actionEvent -> {
-                    deleteItem(c.getICode());
-                });
-
                 tmList.add(c);
+
             }
-            tblItem.setItems(tmList);
+
+
+            tblOrder.setItems(tmList);
+            // System.out.println("Load" + dtoList);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }*/
+
+
+    }
 
     public void addToCartButtonOnAction(ActionEvent event) {
         JFXButton btn = new JFXButton("Delete");
