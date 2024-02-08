@@ -10,5 +10,6 @@ public interface AdditionalItemBo extends SuperBo {
     boolean saveItem(AdditionalItemDto dto) throws SQLException, ClassNotFoundException;
     boolean updateItems(AdditionalItemDto dto) throws SQLException, ClassNotFoundException;
     boolean deleteItem(String id) throws SQLException, ClassNotFoundException;
+    String generateId() throws SQLException, ClassNotFoundException;
     List<AdditionalItemDto> allItems() throws SQLException, ClassNotFoundException;
 }

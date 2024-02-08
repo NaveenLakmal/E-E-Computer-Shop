@@ -16,7 +16,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1176.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdditionalItemFormController">
     <children>
-        <JFXTextField fx:id="txtItemCode" layoutX="69.0" layoutY="224.0" prefHeight="31.0" prefWidth="129.0" />
         <GridPane layoutY="-2.0" prefHeight="80.0" prefWidth="1176.0" style="-fx-background-color: #40a4c2;">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="7.0" prefWidth="78.0" />
@@ -44,6 +43,28 @@
                         <Font name="System Bold" size="40.0" />
                     </font>
                 </Label>
+            <GridPane GridPane.columnIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="40.0" prefWidth="184.0" text="Customer ID" textFill="WHITE" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblItemId" prefHeight="34.0" prefWidth="134.0" text="g" textFill="RED" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold Italic" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
             </children>
         </GridPane>
         <ImageView fx:id="imgBack" fitHeight="59.0" fitWidth="60.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
@@ -61,23 +82,18 @@
             </columns>
         </TableView>
         <JFXButton layoutX="999.0" layoutY="722.0" onAction="#reloadButtonOnAction" prefHeight="46.0" prefWidth="107.0" style="-fx-background-color: green;" text="Reload" />
-        <Label layoutX="69.0" layoutY="177.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="  Item Code" textAlignment="RIGHT">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <JFXTextField fx:id="txtItemPrice" layoutX="473.0" layoutY="224.0" prefHeight="31.0" prefWidth="154.0" />
+        <JFXTextField fx:id="txtItemPrice" layoutX="393.0" layoutY="225.0" prefHeight="31.0" prefWidth="154.0" />
         <JFXButton layoutX="652.0" layoutY="104.0" onAction="#searchButtonOnAction" prefHeight="12.0" prefWidth="129.0" style="-fx-background-color: green;" text="Search">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </JFXButton>
-        <Label layoutX="286.0" layoutY="177.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Name" textAlignment="RIGHT">
+        <Label layoutX="140.0" layoutY="178.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Name" textAlignment="RIGHT">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <Label layoutX="473.0" layoutY="177.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Price" textAlignment="RIGHT">
+        <Label layoutX="393.0" layoutY="178.0" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="Price" textAlignment="RIGHT">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
@@ -93,12 +109,12 @@
             </font>
         </JFXButton>
         <TextField fx:id="txtSearch" layoutX="315.0" layoutY="104.0" prefHeight="39.0" prefWidth="316.0" promptText="Search Here" />
-        <JFXTextField fx:id="txtItemName" layoutX="273.0" layoutY="224.0" prefHeight="31.0" prefWidth="154.0" />
-      <Label layoutX="665.0" layoutY="177.0" prefHeight="39.0" prefWidth="77.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="   QTY" textAlignment="RIGHT">
+        <JFXTextField fx:id="txtItemName" layoutX="127.0" layoutY="225.0" prefHeight="31.0" prefWidth="154.0" />
+      <Label layoutX="659.0" layoutY="184.0" prefHeight="39.0" prefWidth="77.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="   QTY" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtQty" layoutX="665.0" layoutY="216.0" prefHeight="31.0" prefWidth="94.0" />
+      <JFXTextField fx:id="txtQty" layoutX="659.0" layoutY="223.0" prefHeight="31.0" prefWidth="94.0" />
     </children>
 </AnchorPane>

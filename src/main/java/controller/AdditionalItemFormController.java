@@ -45,10 +45,13 @@ public class AdditionalItemFormController {
     public TableColumn colPrice;
     public JFXTextField txtQty;
     public TableColumn colQty;
+    public Label lblItemId;
 
     private AdditionalItemBo additionalItemBo = BoFactory.getInstance().getBo(BoType.ADDITIONALITEM);
 
     public void initialize(){
+
+        setItemId();
         ObservableList list = FXCollections.observableArrayList("Electronic", "Electrical");
 
         //!cmbCategory.setItems(list);
@@ -93,17 +96,16 @@ public class AdditionalItemFormController {
     }
     private void clearFields() {
         tblItem.refresh();
-        txtItemCode.clear();
+
         txtItemName.clear();
         txtItemPrice.clear();
         txtQty.clear();
-        txtItemCode.setEditable(true);
+
     }
 
     private void setData(AdditionalItemTm newValue) {
         if (newValue != null) {
-            txtItemCode.setEditable(false);
-            txtItemCode.setText(newValue.getItemCode());
+
             txtItemName.setText(newValue.getName());
             txtQty.setText(String.valueOf(newValue.getQty()));
             txtItemPrice.setText(String.valueOf(newValue.getPrice()));
@@ -116,6 +118,7 @@ public class AdditionalItemFormController {
             boolean isDeleted = additionalItemBo.deleteItem(iCode);
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION, "Item Deleted!").show();
+                setItemId();
                 loadItemTable();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
@@ -209,7 +212,7 @@ public class AdditionalItemFormController {
 
        // String categoryType = (String) cmbCategory.getValue();
 
-        AdditionalItemDto dto = new AdditionalItemDto(txtItemCode.getText(),
+        AdditionalItemDto dto = new AdditionalItemDto(lblItemId.getText(),
                 txtItemName.getText(),
                 Integer.parseInt(txtQty.getText()),
                 Double.parseDouble(txtItemPrice.getText())
@@ -219,6 +222,7 @@ public class AdditionalItemFormController {
             boolean isSaved = additionalItemBo.saveItem(dto);
             if (isSaved){
                 new Alert(Alert.AlertType.INFORMATION,"Customer Saved!").show();
+                setItemId();
                 loadItemTable();
                 clearFields();
             }
@@ -229,4 +233,15 @@ public class AdditionalItemFormController {
             e.printStackTrace();
         }
     }
+    private void setItemId() {
+        try {
+            lblItemId.setText(additionalItemBo.generateId());
+            //txtOrderId.setEditable(false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -2,7 +2,11 @@ package dao.custom.impl;
 
 import dao.custom.AdditionalItemDao;
 import dao.util.HibernateUtil;
+import dto.AdditionalItemDto;
+import dto.CustomerDto;
 import entity.AdditionalItem;
+import entity.Customer;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -69,5 +73,42 @@ public class AdditionalItemDaoImpl implements AdditionalItemDao {
         }*/
         session.close();
         return list;
+    }
+
+    @Override
+    public AdditionalItemDto getLastItem() throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            // HQL query to get the last customer
+            String hql = "FROM AdditionalItem ORDER BY itemCode DESC";
+            AdditionalItem lastItem = (AdditionalItem) session.createQuery(hql)
+                    .setMaxResults(1)
+                    .uniqueResult();
+
+            if (lastItem != null) {
+                // Convert Hibernate entity to DTO (if needed)
+                return new AdditionalItemDto(
+                        lastItem.getItemCode(),
+                        lastItem.getName(),
+                        lastItem.getQty(),
+                        lastItem.getPrice()
+                );
+            }
+
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return null;
     }
 }

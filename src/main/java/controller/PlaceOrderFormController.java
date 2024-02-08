@@ -270,6 +270,7 @@ public class PlaceOrderFormController {
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, "Order Saved!").show();
                 setOrderId();
+                clearFields();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
             }
@@ -309,40 +310,13 @@ public class PlaceOrderFormController {
             throw new RuntimeException(e);
         }
     }
+    private void clearFields() {
+        tblItem.refresh();
+        txtCustName.clear();
+        txtSubCategory.clear();
+        txtDescription.clear();
 
-   /* public void updateButtonOnAction(ActionEvent actionEvent) {
-        List<OrderDetailDto> list = new ArrayList<>();
-
-        for (AdditionalItemTm tm : tmList) {
-            list.add(new OrderDetailDto(
-                    lblOrderId.getText(),
-                    tm.getItemCode(),
-                    tm.getQty(),
-                    tm.getPrice()
-            ));
-        }
-
-        OrderDto dto = new OrderDto(
-                lblOrderId.getText(),
-                txtSubCategory.getText(),
-                txtDescription.getText(),
-                list
-        );
+    }
 
 
-        try {
-            boolean isSaved = orderBo.updateOrder(dto);
-            if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION, "Order Saved!").show();
-                setOrderId();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-    }*/
 }

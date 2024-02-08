@@ -5,6 +5,7 @@ import dao.DaoFactory;
 import dao.custom.AdditionalItemDao;
 import dao.util.DaoType;
 import dto.AdditionalItemDto;
+import dto.CustomerDto;
 import entity.AdditionalItem;
 
 import java.sql.SQLException;
@@ -38,6 +39,25 @@ public class AdditionalItemBoImpl implements AdditionalItemBo {
     @Override
     public boolean deleteItem(String id) throws SQLException, ClassNotFoundException {
         return additionalItemDao.delete(id);
+    }
+
+    @Override
+    public String generateId() throws SQLException, ClassNotFoundException {
+        try {
+            AdditionalItemDto dto = additionalItemDao.getLastItem();
+            if (dto!=null){
+                String id = dto.getItemCode();
+                int num = Integer.parseInt(id.split("[P]")[1]);
+                num++;
+                return String.format("P%03d",num);
+            }else{
+                return "P001";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
