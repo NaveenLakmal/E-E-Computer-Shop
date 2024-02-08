@@ -10,6 +10,7 @@ public interface OrderBo extends SuperBo {
     boolean saveOrder(OrderDto dto)throws SQLException, ClassNotFoundException;
     boolean updateOrder(OrderDto dto)throws SQLException, ClassNotFoundException;
     String generateId() throws SQLException, ClassNotFoundException;
+    boolean updateStatus(OrderDto dto)throws SQLException, ClassNotFoundException;
 
     List<OrderDto> allOrder() throws SQLException, ClassNotFoundException;
 }

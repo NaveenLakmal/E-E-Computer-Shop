@@ -40,6 +40,11 @@ public class OrderBoImpl implements OrderBo {
     }
 
     @Override
+    public boolean updateStatus(OrderDto dto) throws SQLException, ClassNotFoundException {
+        return orderDao.updateStatus(dto);
+    }
+
+    @Override
     public List<OrderDto> allOrder() throws SQLException, ClassNotFoundException {
         List<OrderDto> entityList = orderDao.getAll();
         return entityList;

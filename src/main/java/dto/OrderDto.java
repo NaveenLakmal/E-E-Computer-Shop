@@ -21,12 +21,13 @@ public class OrderDto {
     private Double total;
     private String status;
 
-    public OrderDto(String orderId, String date, String subCategory, String description,Double total) {
+    public OrderDto(String orderId, String date, String subCategory, String description,Double total,String status) {
         this.orderId = orderId;
         this.date = date;
         this.subCategory = subCategory;
         this.description = description;
         this.total=total;
+        this.status=status;
     }
 
     public OrderDto(String orderId,  String subCategory, String description,Double total, List<OrderDetailDto> list) {
@@ -38,6 +39,12 @@ public class OrderDto {
 
     }
 
+    public OrderDto(String orderId, String date, String subCategory, String status) {
+        this.orderId = orderId;
+        this.date = date;
+        this.subCategory = subCategory;
+        this.status = status;
+    }
 
     private List<OrderDetailDto> list;
 }

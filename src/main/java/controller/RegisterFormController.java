@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterFormController {
     public ImageView imgBack;
@@ -29,7 +31,7 @@ public class RegisterFormController {
 
     private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
 
-    public void initialize(){
+    public void initialize() {
         ObservableList list = FXCollections.observableArrayList("Employee", "Admin", "Main Admin");
 
         cmdAccountType.setItems(list);
@@ -39,6 +41,7 @@ public class RegisterFormController {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
         String rePassword = txtRePassword.getText();
+        String accountType = (String) cmdAccountType.getValue();
 
         if (!password.equals(rePassword)) {
             // Passwords do not match, show an alert
@@ -48,36 +51,64 @@ public class RegisterFormController {
             alert.setContentText("The entered passwords do not match. Please re-enter your passwords.");
             alert.showAndWait();
         } else {
-            // Passwords match, create UserDto object
-            String accountType = (String) cmdAccountType.getValue();
 
-            //System.out.println(accountType);
+            ///start
 
-            UserDto dto = new UserDto(email, password, accountType);
-            // Perform further actions with the UserDto object if needed
 
-            try {
-                boolean isSaved = userBo.saveUser(dto);
+            if (isValidEmail(email)) {
+                if (cmdAccountType != null) {
 
-                if (isSaved){
-                    new Alert(Alert.AlertType.INFORMATION,"Item Saved!").show();
+                    if (accountType != null && !accountType.isEmpty()) {
+
+                        UserDto dto = new UserDto(email, password, accountType);
+                        // Perform further actions with the UserDto object if needed
+
+                        try {
+                            boolean isSaved = userBo.saveUser(dto);
+
+                            if (isSaved) {
+                                new Alert(Alert.AlertType.INFORMATION, "User Created!").show();
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Invalid Account Type!").show();
+                    }
+
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Invalid Email!").show();
                 }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Invalid Email!").show();
             }
 
 
         }
 
 
+        //   end
+
+        // Passwords match, create UserDto object
+
+
+        //System.out.println(accountType);
 
 
     }
 
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&-]+(?:\\.[a-zA-Z0-9_+&-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+
     public void goBack(MouseEvent mouseEvent) {
-        Stage stage = (Stage)imgBack.getScene().getWindow();
+        Stage stage = (Stage) imgBack.getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"))));
             stage.show();

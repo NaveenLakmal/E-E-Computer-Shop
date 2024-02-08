@@ -99,9 +99,13 @@ public class OrderDaoImpl implements OrderDao {
                 orderToUpdate.setDescription(dto.getDescription());
                 orderToUpdate.setSubCategory(dto.getSubCategory());
                 orderToUpdate.setTotal(dto.getTotal());
+                orderToUpdate.setStatus(dto.getStatus());
                 //orderToUpdate.setCustomer(session.find(Customer.class, dto.getCustId()));
 
+
                 session.update(orderToUpdate);
+
+
 
                 transaction.commit();
                 return true;
@@ -136,7 +140,8 @@ public class OrderDaoImpl implements OrderDao {
                     orders.getDate(),
                     orders.getSubCategory(),
                     orders.getDescription(),
-                    orders.getTotal()
+                    orders.getTotal(),
+                    orders.getStatus()
 
             ));
 
@@ -166,5 +171,67 @@ public class OrderDaoImpl implements OrderDao {
             );
         }
         return null;
+    }
+
+    @Override
+    public boolean updateStatus(OrderDto dto) throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Orders orderToUpdate = session.find(Orders.class, dto.getOrderId());
+
+            if (orderToUpdate != null) {
+                List<OrderDetailDto> list = dto.getList();
+
+                for (OrderDetailDto detailDto : list) {
+                    AdditionalItem item = session.find(AdditionalItem.class, detailDto.getItemCode());
+
+                    OrderDetail existingOrderDetail = orderToUpdate.getOrderDetails().stream()
+                            .filter(od -> od.getId().getItemCode().equals(detailDto.getItemCode()))
+                            .findFirst()
+                            .orElse(null);
+
+                    if (existingOrderDetail == null) {
+                        OrderDetail newOrderDetail = new OrderDetail(
+                                new OrderDetailsKey(dto.getOrderId(), detailDto.getItemCode()),
+                                item,
+                                orderToUpdate,
+                                detailDto.getQty(),
+                                detailDto.getPrice()
+                        );
+                        session.save(newOrderDetail);
+                    } else {
+                        //existingOrderDetail.setQty(detailDto.getQty());
+                        int newQty = existingOrderDetail.getQty() + detailDto.getQty();
+                        existingOrderDetail.setQty(newQty);
+                        //existingOrderDetail.setPrice(detailDto.getPrice());
+                        double newPrice = existingOrderDetail.getPrice() + detailDto.getPrice();
+                        existingOrderDetail.setPrice(newPrice);
+                    }
+                }
+
+                //orderToUpdate.setDate(dto.getDate());
+                //orderToUpdate.setCategory(dto.getCategory());
+                //orderToUpdate.setDescription(dto.getDescription());
+                //orderToUpdate.setSubCategory(dto.getSubCategory());
+                //orderToUpdate.setTotal(dto.getTotal());
+                orderToUpdate.setStatus(dto.getStatus());
+                //orderToUpdate.setCustomer(session.find(Customer.class, dto.getCustId()));
+
+
+                session.update(orderToUpdate);
+
+
+
+                transaction.commit();
+                return true;
+            } else {
+                transaction.rollback();
+                return false;
+            }
+        } finally {
+            session.close();
+        }
     }
 }

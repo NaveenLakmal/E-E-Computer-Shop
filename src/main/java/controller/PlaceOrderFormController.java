@@ -18,6 +18,9 @@ import dto.*;
 import dto.tm.AdditionalItemTm;
 import dto.tm.ItemTm;
 import dto.tm.OrderTm;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -68,6 +72,8 @@ public class PlaceOrderFormController {
     public JFXTextField txtQty;
     public TableColumn colSubItemQty;
     public JFXTextField txtOrderId;
+    public Label lblTime;
+    public Label lblDate;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
 
     private CustomerBo customerBo = new CustomerBoImpl();
@@ -80,6 +86,8 @@ public class PlaceOrderFormController {
     private ObservableList<AdditionalItemTm> tmList = FXCollections.observableArrayList();
 
     public void initialize() {
+        dateAndTime();
+
         ObservableList list = FXCollections.observableArrayList("Electronic", "Electrical");
         cmbCategory.setItems(list);
 
@@ -251,7 +259,7 @@ public class PlaceOrderFormController {
                 txtSubCategory.getText(),
                 txtDescription.getText(),
                 0.00,     /*Total*/
-                "Processing",
+                "Pending",
                 list
         );
 
@@ -270,6 +278,23 @@ public class PlaceOrderFormController {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void dateAndTime() {
+        Timeline date = new Timeline((new KeyFrame(
+                Duration.ZERO,
+                actionEvent -> lblDate.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+        )), new KeyFrame(Duration.seconds(1)));
+        date.setCycleCount(Animation.INDEFINITE);
+        date.play();
+
+        Timeline time = new Timeline(new KeyFrame(
+                Duration.ZERO,
+                actionEvent -> lblTime.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")))
+        ), new KeyFrame(Duration.seconds(1)));
+
+        time.setCycleCount(Animation.INDEFINITE);
+        time.play();
     }
 
    /* public void updateButtonOnAction(ActionEvent actionEvent) {

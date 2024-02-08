@@ -158,7 +158,8 @@ public class EditOrderFormController {
                         dto.getDate(),
                         dto.getSubCategory(),
                         dto.getDescription(),
-                        dto.getTotal()
+                        dto.getTotal(),
+                        dto.getStatus()
 
 
                 );
@@ -214,14 +215,16 @@ public class EditOrderFormController {
 
     private void clearFields() {
         tblPlaceOrder.getItems().clear();
-        cmbItemCode.setValue(null);
+        //cmbItemCode.setValue(null);
+        txtOrderId.setEditable(false);
+        txtOrderId.clear();
         txtSubItemName.clear();
         txtQty.clear();
         txtSubItemPrice.clear();
         txtSubCategory.clear();
         txtDescription.clear();
 
-        //txtOrderId.setEditable(true);
+        txtOrderId.setEditable(true);
     }
 
     public void goBack(MouseEvent mouseEvent) {
@@ -305,7 +308,7 @@ public class EditOrderFormController {
                 new Alert(Alert.AlertType.INFORMATION, "Order Updated!").show();
                 loadOrderTable();
                 loadOrderDetailTable();
-                //clearFields();
+                clearFields();
 
 
             } else {

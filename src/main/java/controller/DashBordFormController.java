@@ -117,4 +117,16 @@ public class DashBordFormController {
             throw new RuntimeException(e);
         }
     }
+
+    public void stsChangeButtonOnAction(ActionEvent event) {
+        Stage stage = (Stage) lblDate.getScene().getWindow();
+        stage.setTitle("Status Change Form");
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/StatusChangeForm.fxml"))));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
