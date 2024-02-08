@@ -77,17 +77,17 @@ public class LoginFormController {
             //System.out.println(userType);
             if (txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty()) {
                 //new Alert(Alert.AlertType.ERROR, "user Name Input bar or Password Input Bar is Emty").show();
-                Stage stage = (Stage) txtUserName.getScene().getWindow();
-                stage.setTitle("Register Form");
-                try {
-                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBordForm.fxml"))));
-                    stage.centerOnScreen();
-                    stage.show();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+//                Stage stage = (Stage) txtUserName.getScene().getWindow();
+//                stage.setTitle("Register Form");
+//                try {
+//                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBordForm.fxml"))));
+//                    stage.centerOnScreen();
+//                    stage.show();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
             } else if (userType == null) {
-                System.out.println("check point");
+                //System.out.println("check point");
                 new Alert(Alert.AlertType.ERROR, "Invalid User Name Or Password...!!").show();
                 // Handle the case where userType is null
 
@@ -117,13 +117,21 @@ public class LoginFormController {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("employee");
+                //System.out.println("employee");
                 //new Alert(Alert.AlertType.INFORMATION,"vild User name or Password..!").show();
             } else if (userType.equalsIgnoreCase("Admin")) {
-                System.out.println("admin");
+                //S/ystem.out.println("admin");
                 //new Alert(Alert.AlertType.ERROR,"wrdvild User name or Password..!").show();
             } else if (userType.equalsIgnoreCase("Main Admin")) {
-                System.out.println("Main admin");
+                Stage stage = (Stage) txtUserName.getScene().getWindow();
+                stage.setTitle("Register Form");
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/MainAdminForm.fxml"))));
+                    stage.centerOnScreen();
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 //new Alert(Alert.AlertType.ERROR,"wrdvild User name or Password..!").show();
             }
         } catch (SQLException e) {

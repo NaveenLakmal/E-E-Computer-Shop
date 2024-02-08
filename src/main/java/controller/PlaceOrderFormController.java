@@ -74,6 +74,7 @@ public class PlaceOrderFormController {
     public JFXTextField txtOrderId;
     public Label lblTime;
     public Label lblDate;
+    public ImageView imgOrderStatus;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
 
     private CustomerBo customerBo = new CustomerBoImpl();
@@ -295,6 +296,18 @@ public class PlaceOrderFormController {
 
         time.setCycleCount(Animation.INDEFINITE);
         time.play();
+    }
+
+    public void goStatusForm(MouseEvent mouseEvent) {
+        Stage stage = (Stage) lblDate.getScene().getWindow();
+        stage.setTitle("Status Change Form");
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/StatusChangeForm.fxml"))));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
    /* public void updateButtonOnAction(ActionEvent actionEvent) {

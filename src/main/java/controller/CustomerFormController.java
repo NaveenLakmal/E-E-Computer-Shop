@@ -13,10 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -41,51 +38,53 @@ public class CustomerFormController {
     public JFXTextField txtNumber;
     public JFXTextField txtEmail;
     public TableView tblCustomer;
+    public Label lblCustomerId;
 
     private CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
 
-        public void initialize(){
-            colCustId.setCellValueFactory(new PropertyValueFactory<>("custId"));
-            colCustName.setCellValueFactory(new PropertyValueFactory<>("custName"));
-            colNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
-            colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-            colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
-            loadCustomerTable();
+    public void initialize() {
+        setCustomerId();
+        colCustId.setCellValueFactory(new PropertyValueFactory<>("custId"));
+        colCustName.setCellValueFactory(new PropertyValueFactory<>("custName"));
+        colNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        loadCustomerTable();
 
-            tblCustomer.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-                setData((CustomerTm) newValue);
-            });
+        tblCustomer.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            setData((CustomerTm) newValue);
+        });
 
 
-            // Create the FilteredList and set it as the items for the TableView
-            FilteredList<CustomerTm> filteredList = new FilteredList<>(tblCustomer.getItems(), p -> true);
+        // Create the FilteredList and set it as the items for the TableView
+        FilteredList<CustomerTm> filteredList = new FilteredList<>(tblCustomer.getItems(), p -> true);
 
 // Add a listener to the text property of the search field
-            txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-                // Update the predicate based on the new text value
-                filteredList.setPredicate(customer -> {
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true; // Show all items when the search field is empty
-                    }
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Update the predicate based on the new text value
+            filteredList.setPredicate(customer -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true; // Show all items when the search field is empty
+                }
 
-                    // Check if the item's properties contain the search text
-                    String lowerCaseFilter = newValue.toLowerCase();
-                    return customer.getCustId().toLowerCase().contains(lowerCaseFilter) ||
-                            customer.getCustName().toLowerCase().contains(lowerCaseFilter) ||
-                            customer.getNumber().toLowerCase().contains(lowerCaseFilter);
-                    // Add more fields as needed
-                });
+                // Check if the item's properties contain the search text
+                String lowerCaseFilter = newValue.toLowerCase();
+                return customer.getCustId().toLowerCase().contains(lowerCaseFilter) ||
+                        customer.getCustName().toLowerCase().contains(lowerCaseFilter) ||
+                        customer.getNumber().toLowerCase().contains(lowerCaseFilter);
+                // Add more fields as needed
             });
+        });
 
-            // Bind the FilteredList to the TableView
-            tblCustomer.setItems(filteredList);
+        // Bind the FilteredList to the TableView
+        tblCustomer.setItems(filteredList);
 
 
-            //
-        }
+        //
+    }
 
     public void goBack(MouseEvent mouseEvent) {
-        Stage stage = (Stage)imgBack.getScene().getWindow();
+        Stage stage = (Stage) imgBack.getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashBordForm.fxml"))));
             stage.show();
@@ -95,17 +94,16 @@ public class CustomerFormController {
     }
 
 
-
     private void loadCustomerTable() {
         ObservableList<CustomerTm> tmList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDto> dtoList  = customerBo.allCustomer();
-            for (CustomerDto dto:dtoList) {
+            List<CustomerDto> dtoList = customerBo.allCustomer();
+            for (CustomerDto dto : dtoList) {
                 JFXButton btn = new JFXButton("Delete");
-                    btn.setStyle("-fx-background-color: #ff4d79;"); // Set the background color to red
-                    btn.setPrefWidth(90); // Set preferred width
-                    btn.setPrefHeight(32); // Set preferred height
+                btn.setStyle("-fx-background-color: #ff4d79;"); // Set the background color to red
+                btn.setPrefWidth(90); // Set preferred width
+                btn.setPrefHeight(32); // Set preferred height
                 CustomerTm c = new CustomerTm(
                         dto.getCustId(),
                         dto.getCustName(),
@@ -128,18 +126,18 @@ public class CustomerFormController {
 
     private void clearFields() {
         tblCustomer.refresh();
-        txtCustId.clear();
+        //txtCustId.clear();
         txtCustName.clear();
         txtNumber.clear();
         txtEmail.clear();
 
-        txtCustId.setEditable(true);
+        //txtCustId.setEditable(true);
     }
 
     private void setData(CustomerTm newValue) {
         if (newValue != null) {
-            txtCustId.setEditable(false);
-            txtCustId.setText(newValue.getCustId());
+            //txtCustId.setEditable(false);
+            //txtCustId.setText(newValue.getCustId());
             txtCustName.setText(newValue.getCustName());
             txtNumber.setText(newValue.getNumber());
             txtEmail.setText(newValue.getEmail());
@@ -153,15 +151,15 @@ public class CustomerFormController {
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION, "Item Deleted!").show();
                 loadCustomerTable();
+                setCustomerId();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
             }
-        }
-        catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             //new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
             e.printStackTrace();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
         }
     }
@@ -178,8 +176,8 @@ public class CustomerFormController {
 
         try {
             boolean isUpdated = customerBo.updateCustomer(dto);
-            if (isUpdated){
-                new Alert(Alert.AlertType.INFORMATION,"Items "+dto.getCustId()+" Updated!").show();
+            if (isUpdated) {
+                new Alert(Alert.AlertType.INFORMATION, "Items " + dto.getCustId() + " Updated!").show();
                 loadCustomerTable();
                 clearFields();
             }
@@ -191,7 +189,7 @@ public class CustomerFormController {
     }
 
     public void saveButtonOnAction(ActionEvent actionEvent) {
-        CustomerDto dto = new CustomerDto(txtCustId.getText(),
+        CustomerDto dto = new CustomerDto(lblCustomerId.getText(),
                 txtCustName.getText(),
                 txtNumber.getText(),
                 txtEmail.getText()
@@ -199,14 +197,16 @@ public class CustomerFormController {
 
         try {
             boolean isSaved = customerBo.saveCustomer(dto);
-            if (isSaved){
-                new Alert(Alert.AlertType.INFORMATION,"Customer Saved!").show();
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION, "Customer Saved!").show();
+
+                setCustomerId();
                 loadCustomerTable();
                 clearFields();
             }
 
-        } catch (SQLIntegrityConstraintViolationException ex){
-            new Alert(Alert.AlertType.ERROR,"Duplicate Entry").show();
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            new Alert(Alert.AlertType.ERROR, "Duplicate Entry").show();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -216,5 +216,16 @@ public class CustomerFormController {
         loadCustomerTable();
         tblCustomer.refresh();
         clearFields();
+    }
+
+    private void setCustomerId() {
+        try {
+            lblCustomerId.setText(customerBo.generateId());
+            //txtOrderId.setEditable(false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -16,14 +16,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1176.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerFormController">
    <children>
-      <JFXTextField fx:id="txtCustId" layoutX="79.0" layoutY="218.0" prefHeight="31.0" prefWidth="116.0" />
-      <GridPane layoutX="-15.0" prefHeight="80.0" prefWidth="1192.0" style="-fx-background-color: #40a4c2;">
+      <GridPane layoutX="1.0" prefHeight="80.0" prefWidth="1176.0" style="-fx-background-color: #40a4c2;">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="7.0" prefWidth="78.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="298.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="471.0" minWidth="10.0" prefWidth="401.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="67.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="246.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="7.0" prefWidth="86.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="379.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="471.0" minWidth="10.0" prefWidth="337.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="471.0" minWidth="10.0" prefWidth="45.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="79.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="268.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -34,23 +34,45 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <ImageView fitHeight="59.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+            <ImageView fitHeight="59.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
                   <Image url="@../asset/images/customer.png" />
                </image>
             </ImageView>
-            <Label prefHeight="75.0" prefWidth="204.0" text="Customer" GridPane.columnIndex="4">
+            <Label prefHeight="75.0" prefWidth="204.0" text="Customer" GridPane.columnIndex="5">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
+            <ImageView fx:id="imgBack" fitHeight="59.0" fitWidth="60.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/back.png" />
+               </image>
+            </ImageView>
+            <GridPane GridPane.columnIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="lblCustomerId" prefHeight="34.0" prefWidth="134.0" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold Italic" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="40.0" prefWidth="184.0" text="Customer ID" textFill="WHITE" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
          </children>
       </GridPane>
-      <ImageView fx:id="imgBack" fitHeight="59.0" fitWidth="60.0" layoutX="20.0" layoutY="20.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asset/images/back.png" />
-         </image>
-      </ImageView>
       <TableView fx:id="tblCustomer" layoutX="94.0" layoutY="353.0" prefHeight="360.0" prefWidth="983.0">
          <columns>
             <TableColumn fx:id="colCustId" prefWidth="102.0" text="Customer ID" />
@@ -60,29 +82,24 @@
             <TableColumn fx:id="colOption" prefWidth="115.0" text="Option" />
          </columns>
       </TableView>
-      <Label layoutX="79.0" layoutY="167.0" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text=" Customer ID" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtEmail" layoutX="842.0" layoutY="222.0" prefHeight="31.0" prefWidth="291.0" />
-      <JFXTextField fx:id="txtNumber" layoutX="624.0" layoutY="222.0" prefHeight="31.0" prefWidth="139.0" />
+      <JFXTextField fx:id="txtEmail" layoutX="685.0" layoutY="226.0" prefHeight="31.0" prefWidth="291.0" />
+      <JFXTextField fx:id="txtNumber" layoutX="467.0" layoutY="226.0" prefHeight="31.0" prefWidth="139.0" />
       <JFXButton layoutX="662.0" layoutY="114.0" onAction="#searchButtonOnAction" prefHeight="12.0" prefWidth="129.0" style="-fx-background-color: green;" text="Search">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <Label layoutX="261.0" layoutY="167.0" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="         Name" textAlignment="RIGHT">
+      <Label layoutX="104.0" layoutY="171.0" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="         Name" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="624.0" layoutY="167.0" prefHeight="39.0" prefWidth="139.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="   Cont.No" textAlignment="RIGHT">
+      <Label layoutX="467.0" layoutY="171.0" prefHeight="39.0" prefWidth="139.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="   Cont.No" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="842.0" layoutY="167.0" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="      E-mail" textAlignment="RIGHT">
+      <Label layoutX="685.0" layoutY="171.0" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #40a4c2; -fx-background-radius: 10px;" text="      E-mail" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -98,7 +115,7 @@
          </font>
       </JFXButton>
       <TextField fx:id="txtSearch" layoutX="325.0" layoutY="114.0" prefHeight="39.0" prefWidth="316.0" promptText="Search Here" />
-      <JFXTextField fx:id="txtCustName" layoutX="262.0" layoutY="222.0" prefHeight="31.0" prefWidth="267.0" />
+      <JFXTextField fx:id="txtCustName" layoutX="105.0" layoutY="226.0" prefHeight="31.0" prefWidth="267.0" />
       <JFXButton layoutX="967.0" layoutY="724.0" onAction="#reloadButtonOnAction" prefHeight="46.0" prefWidth="129.0" style="-fx-background-color: green;" text="Reload">
          <font>
             <Font name="System Bold" size="20.0" />

@@ -5,6 +5,7 @@ import dao.DaoFactory;
 import dao.custom.CustomerDao;
 import dao.util.DaoType;
 import dto.CustomerDto;
+import dto.OrderDto;
 import entity.Customer;
 
 import java.sql.SQLException;
@@ -36,6 +37,25 @@ public class CustomerBoImpl implements CustomerBo {
     @Override
     public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
         return customerDao.delete(id);
+    }
+
+    @Override
+    public String generateId() throws SQLException, ClassNotFoundException {
+        try {
+            CustomerDto dto = customerDao.getLastCustomer();
+            if (dto!=null){
+                String id = dto.getCustId();
+                int num = Integer.parseInt(id.split("[C]")[1]);
+                num++;
+                return String.format("C%03d",num);
+            }else{
+                return "C001";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

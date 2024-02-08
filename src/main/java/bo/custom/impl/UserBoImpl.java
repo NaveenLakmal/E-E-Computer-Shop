@@ -112,8 +112,8 @@ public class UserBoImpl implements UserBo {
 
 
         /* Display the unencrypted and encrypted passwords. */
-        System.out.println("Plain-text password: " + enterPassword);
-        System.out.println("Encrypted password using MD5: " + encryptedpassword);
+        //System.out.println("Plain-text password: " + enterPassword);
+        //System.out.println("Encrypted password using MD5: " + encryptedpassword);
 
         String userType = userDao.loginCheckDao(new User(
                 dto.getUserName(),
